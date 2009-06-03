@@ -34,15 +34,11 @@ class Periodicity
   def valid?
     return true if Periodicity.periods.map {|disp, period| period}.include?(@periodicity.to_i)
 
-    @errors.add :periodicity, ActiveRecord::Errors.default_error_messages[:inclusion]
+    @errors.add :periodicity, I18n.translate('activerecord.errors.messages.inclusion')
     return false
   end
 
   def self.human_attribute_name(attr)
     attr.humanize
   end
-
-  # def new_record?
-    # true
-  # end
 end

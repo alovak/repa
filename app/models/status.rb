@@ -25,7 +25,7 @@ class Status
   def valid?
     return true if OPTIONS.map {|disp, value| value}.include?(@status.to_i)
 
-    @errors.add :status, ActiveRecord::Errors.default_error_messages[:inclusion]
+    @errors.add :status, I18n.translate('activerecord.errors.messages.inclusion')
     return false
   end
 

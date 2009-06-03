@@ -29,9 +29,7 @@ class UserTest < ActiveSupport::TestCase
 
     invalid_passwords.each do |password_params|
       @user.password = @user.password_confirmation = String.random_string(password_params[:length])
-      assert !@user.valid?
-      assert_equal @user.errors.size, 1
-      assert_invalid(@user, :password, password_params[:message], password_params[:should_be])
+      assert_error_on(@user, :password, password_params[:message], { :count => password_params[:should_be] }, 1)
     end
   end
 
@@ -45,8 +43,7 @@ class UserTest < ActiveSupport::TestCase
 
   def test_uniqe_email
     user = create_user(:email => @user.email)
-    assert !user.valid?
-    assert_invalid(user, :email, :taken)
+    assert_error_on(user, :email, :taken)
   end
 
   protected

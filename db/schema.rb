@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20080724150030) do
   end
 
   create_table "groups_users", :id => false, :force => true do |t|
-    t.integer "group_id", :limit => 11
-    t.integer "user_id",  :limit => 11
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   add_index "groups_users", ["group_id", "user_id"], :name => "index_groups_users_on_group_id_and_user_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20080724150030) do
   create_table "tasks", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "group_id",       :limit => 11
-    t.integer  "periodicity",    :limit => 11
+    t.integer  "group_id"
+    t.integer  "periodicity"
     t.date     "start_on"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(:version => 20080724150030) do
   end
 
   create_table "works", :force => true do |t|
-    t.integer  "task_id",    :limit => 11
-    t.integer  "owner_id",   :limit => 11
-    t.integer  "group_id",   :limit => 11
-    t.integer  "status",     :limit => 11
+    t.integer  "task_id"
+    t.integer  "owner_id"
+    t.integer  "group_id"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -20,7 +20,7 @@
 <% for task in @tasks %>
   <tr>
     <td><%=h task.name %></td>
-    <td><%=truncate( h( task.description ), 100 ) %></td>
+    <td><%=truncate( h( task.description ), :length => 100 ) %></td>
     <td><%=h task.group.name %></td>
     <td><%=h task.periodicity.name %></td>
     <td><%=h task.start_on.to_date %></td>

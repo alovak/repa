@@ -21,9 +21,8 @@ class WorkTest < ActiveSupport::TestCase
 
   def test_status_validation
     @work.status = 'something'
-    assert !@work.valid?
-    assert_invalid(@work, :status, :invalid)
-    assert_invalid(@work.status, :status, :inclusion)
+    assert_error_on(@work, :status, :invalid)
+    assert_error_on(@work.status, :status, :inclusion)
   end
 
   def test_delete_owner_if_status_changed_to_new
@@ -44,16 +43,5 @@ class WorkTest < ActiveSupport::TestCase
     assert_equal 3, @work.status.status
     assert_equal @user.id, @work.owner.id
     assert @work.updated_at < @work.created_at + @work.task.periodicity.periodicity.days
-  end
-
-  def test_close_date_generator
-    500.times do |counter|
-      date = rand(365).days.ago
-      period = rand(100)
-      new_date = Rand.period_date( date, period )
-      assert new_date < date + period.day + 1.minute #1 minute to throw away seconds
-      # puts "#{ new_date } should be less than #{ Date.today.to_datetime }"
-      # assert new_date < Date.today.to_datetime
-    end
   end
 end

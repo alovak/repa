@@ -1,3 +1,4 @@
+require 'ext/core'
 require 'rand'
 require 'will_paginate'
 
