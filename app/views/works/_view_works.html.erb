@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <%= render :partial => 'works/work_headers' %>
+    <th></th>
+  </tr>
+<% for work in works %>
+  <tr>
+    <%= render :partial => 'works/work', :object => work %>
+    <td><%= link_to 'Edit', edit_work_path(work) %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate works, :class => 'apple_pagination' %>

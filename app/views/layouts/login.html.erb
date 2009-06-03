@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Repeated actions: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold', 'repa', 'pagination' %>
+</head>
+<body>
+  <div id="header">
+      <div class="metanav">
+        <%= content_tag(:p, image_tag('logo.png')) %>
+      </div>
+  </div>
+  <div id="page">
+    <%= render :partial => 'common/header' %>
+    <% if flash[:notice] %>
+      <div id="flash"><%= flash[:notice] %></div>
+    <% end %>
+    <%= yield  %>
+  </div>
+</body>
+</html>

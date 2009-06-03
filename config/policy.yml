@@ -1,0 +1,3 @@
+password:
+  min_length: 5
+  max_length: 20

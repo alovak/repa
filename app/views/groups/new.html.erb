@@ -1,0 +1,8 @@
+<% @header = 'Новая группа' %>
+<div class="page_body">
+  <% form_for(@group) do |f| %>
+    <%= f.error_messages %>
+  <%= render :partial => f %>
+  <%= render :partial => '/common/create_or_cancel' %>
+  <% end %>
+</div>

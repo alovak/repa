@@ -1,0 +1,31 @@
+<% @header = 'Просмотр задачи' %>
+<div class="page_body">
+<p>
+  <b>Name:</b>
+  <%=h @task.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @task.description %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%=h @task.group.name %>
+</p>
+
+<p>
+  <b>Periodicity:</b>
+  <%=h @task.periodicity.name %>
+</p>
+
+<p>
+  <b>Start on:</b>
+  <%=h @task.start_on %>
+</p>
+
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>
+</div>

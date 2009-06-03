@@ -1,0 +1,17 @@
+<% @header = h(@work.task.name) %>
+<div class="page_body">
+  <p><%= simple_format h( @work.task.description ) %></p>
+  <% if @work.owner -%>
+    <%= content_tag :strong, 'Исполнитель: ' %><%= h @work.owner.name %>
+  <% end -%>
+  <%= error_messages_for :object => [@work, @work.status] %>
+  <% form_for(@work) do |form| %>
+  <dl>
+    <% form.fields_for :status, @work.status do |ff| %>
+    <dt><%= ff.label :status %></dt>
+    <dd><%= ff.select :status, Status::OPTIONS %></dd>
+    <% end %>
+  </dl>
+  <%= render :partial => '/common/update_or_back' %>
+  <% end %>
+</div>

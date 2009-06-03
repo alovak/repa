@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Repeated actions: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold', 'repa', 'pagination' %>
+</head>
+<body>
+  <div id="header">
+    <div class="metanav">
+      <%= content_tag(:p, image_tag('logo.png')) %>
+      <p class="meta-personal">
+        Repa beta 0.1
+        <em><%= @current_user.name %></em>
+        &bull;
+        <%= link_to 'Выйти', :controller => :users, :action => :logout %>
+      </p>
+    </div>
+  <ul id="menu">
+    <%= tab_link('Мои работы',{:controller => :my, :action => :works}) %>
+    <%= tab_link('Работы моих групп', {:controller => :my, :action => :groups_works}) %>
+    <% if @current_user.is_admin %>
+      <%= tab_link('Задачи', {:controller => :tasks}) %>
+      <%= tab_link('Пользователи', {:controller => :users}) %>
+      <%= tab_link('Группы', {:controller => :groups}) %>
+      <%= tab_link('Работы', {:controller => :works}) %>
+    <% end %>
+  </ul>
+  </div>
+  <div id="page">
+    <%= render :partial => 'common/header' %>
+    <% if flash[:notice] %>
+      <div id="flash"><%= flash[:notice] %></div>
+    <% end %>
+    <%= yield  %>
+  </div>
+</body>
+</html>

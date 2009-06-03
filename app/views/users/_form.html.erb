@@ -1,0 +1,25 @@
+<dl>
+  <dt><%= form.label :name, "Имя" %></dt>
+  <dd><%= form.text_field :name, :maxlength => 50, :size => 30 %></dd>
+  <dt><%= form.label :email %></dt>
+  <dd><%= form.text_field :email, :size => 30  %></dd>
+  <dt><%= form.label :password, 'Пароль' %></dt>
+  <dd><%= form.password_field :password, :size => 30  %></dd>
+  <dt><%= form.label :password_confirmation, 'повтор пароля' %></dt>
+  <dd><%= form.password_field :password_confirmation, :size => 30  %></dd>
+  <dt><%= form.label :is_admin, 'администратор' %></dt>
+  <dd><%= form.check_box :is_admin  %></dd>
+</dl>
+
+<h2>Группы пользователя</h2>
+<dl>
+  <% Group.find(:all).each do |g| %>
+  <dt><%= label_tag "user_group_#{g.id}", g.name %></dt>
+    <dd>
+      <%= check_box_tag("user[group_ids][]",
+        g.id,
+        @user.groups.include?(g),
+        :id => "user_group_#{g.id}") %>
+    </dd>
+  <% end %>
+</dl>

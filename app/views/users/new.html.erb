@@ -1,0 +1,9 @@
+<% @header = 'Добавление пользователя' %>
+<div class="page_body">
+  <% form_for(@user) do |f| %>
+    <%= f.error_messages %>
+    <p>Все поля обязательны для заполнения. Email будет использоваться пользователем при входе в систему</p>
+    <%= render :partial => f %>
+    <%= render :partial => '/common/create_or_cancel' %>
+  <% end %>
+</div>

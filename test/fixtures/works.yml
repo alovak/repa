@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+work:
+  owner: nil
+  group: users
+  task: task
+  status: 1
+admin_work:
+  owner: nil
+  group: admins
+  task: task_for_admin
+  status: 2

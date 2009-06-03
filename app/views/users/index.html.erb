@@ -1,0 +1,22 @@
+<% @header = 'Пользователи' %>
+
+<% @page_header_links = capture do %>
+  <%= link_to 'Добавить нового пользователя', :action => :new %>
+<% end %>
+
+<div class="page_body">
+  <% for user in @users %>
+  <div class="user">
+    <h3><%= h user.name %></h3>
+    <a href="mailto:<%= h(user.email) %>"><%=h user.email %></a>
+    <br />
+    <div class="edit">
+      <%= link_to 'редактировать', edit_user_path(user) %>
+      <br />
+      <%= link_to 'удалить', user, :confirm => 'Вы уверены?', :method => :delete %>
+    </div>
+  </div>
+  <% end %>
+  <div style="clear: both;"></div>
+</div>
+

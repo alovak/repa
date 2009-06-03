@@ -1,0 +1,23 @@
+<% @header = 'Группы' %>
+
+<% @page_header_links = capture do %>
+  <%= link_to 'Создать группу', new_group_path %>
+<% end %>
+<div class="page_body">
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% for group in @groups %>
+  <tr>
+    <td><%=h group.name %></td>
+    <td><%= link_to 'редактировать', edit_group_path(group) %></td>
+    <td><%= link_to 'удалить', group, :confirm => 'вы уверены?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+</div>

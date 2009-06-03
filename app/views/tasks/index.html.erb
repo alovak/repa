@@ -1,0 +1,33 @@
+
+<% @header = 'Задачи' %>
+<% @page_header_links = capture do %>
+  <%= link_to 'Создать задачу', new_task_path %>
+<% end %>
+
+<div class="page_body">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Group</th>
+    <th>Periodicity</th>
+    <th>Start on</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% for task in @tasks %>
+  <tr>
+    <td><%=h task.name %></td>
+    <td><%=truncate( h( task.description ), 100 ) %></td>
+    <td><%=h task.group.name %></td>
+    <td><%=h task.periodicity.name %></td>
+    <td><%=h task.start_on.to_date %></td>
+    <td><%= link_to 'Show', task %></td>
+    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+    <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+</div>

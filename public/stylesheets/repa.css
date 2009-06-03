@@ -1,0 +1,231 @@
+BODY {
+  background: #534b38;
+  font-family:"Helvetica Neue",Arial,Helvetica,Tahoma,sans-serif;
+  font-size: 80%;
+  margin: 0;
+  padding: 0 20px;
+}
+
+a {
+  color: #3366cc;
+}
+
+/* MAIN LAYOUT BLOCKS */
+#header {
+  overflow: hidden;
+  margin: 0pt;
+}
+
+#page {
+  overflow: hidden;
+  background: #fff;
+}
+
+#footer {
+  overflow: hidden;
+}
+
+#header .metanav {
+  color:#666655;
+  font-size: 85%;
+  overflow:hidden;
+  padding:10px 0;
+}
+#header .metanav p {
+  float:left;
+  margin:0pt;
+  padding:0pt;
+}
+#header .metanav .meta-personal {
+  float:right;
+}
+
+#header .metanav .meta-personal em {
+color:#AAAA88;
+font-style:normal;
+}
+
+#header .metanav a {
+border-bottom:1px solid #777766;
+color:#AAAA88;
+text-decoration: none;
+}
+
+#header .metanav a:hover {
+border-color:#CCCCBB;
+color:#CCCCAA;
+}
+
+#header .metanav a:active, #header .metanav span {
+border:0pt none;
+color:#CCCCAA;
+}
+#header .metanav strong {
+font-weight:bold;
+}
+
+ul#menu {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+ul#menu li{
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+
+  float: left;
+  color: #ddd;
+  margin-right: 4px;
+  font-weight: bold;
+}
+ul#menu li a {
+  display: block;
+  background: #666150;
+  color: #ddd;
+  text-decoration: none;
+  padding: 7px 15px;
+}
+ul#menu li a:hover {
+  background-color:#888372;
+  color:#FFFFFF;
+}
+ul#menu li span {
+  display: block;
+  background: #e3f5ce;
+  color: #445533;
+  text-decoration: none;
+  padding: 7px 15px;
+}
+
+div#flash {
+  background: green;
+  color: white;
+  padding: 10px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0pt;
+  margin:0pt;
+  padding:0pt;
+}
+tr {
+  text-align: left;
+}
+th {
+  border-bottom: 2px solid #ddd;
+  padding: 10px 10px;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 10px;
+}
+
+
+.list-line-odd {
+  background: #cecece;
+}
+.list-line-even {
+  background: #fff;
+}
+
+input { padding: 3px; }
+
+form dl {
+  background: #f3f3f3;
+  padding: 13px 0;
+}
+
+label {
+  font-weight: bold;
+  font-size: 11px;
+}
+
+form dt {
+  width: 120px;
+  margin: 2px 8px 0 0; padding: 0;
+  text-align: right;
+  white-space: nowrap;
+  float: left;
+  clear: left;
+  position: relative;
+}
+
+form dd {
+  margin: 0 0 5px 0px;
+  font-size: 10px;
+}
+
+
+/* PAGE HEADER  */
+
+div.page_header {
+  clear: both;
+  background: #e3f5ce;
+  margin: 0 0 5px 0;
+  padding: 13px 30px 13px 24px;
+}
+
+div.page_header h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 140%;
+  font-weight: normal;
+  color: #445533;
+}
+
+div.page_body h2 {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+div.page_body {
+  padding: 10px 30px 10px 24px;
+  background: #fff;
+}
+
+/* PAGE HEADER LINKS */
+
+div.page_header .links {
+  float: right;
+  width: 200px;
+  margin-top: 0;
+  text-align: right;
+  color: #ccc;
+  line-height: 20px;
+}
+div.page_header .links a {
+  color: #534b38;
+}
+div.actions {
+  padding: 10px 30px 10px 24px;
+}
+/* USERS */
+
+.user { 
+  width: 33%; 
+  float: left;
+  margin-bottom: 15px;
+}
+.user h3 {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* EDITING LINKS */
+.edit a {
+  color: #ff0000;
+}

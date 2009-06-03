@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+<% today = Date.today %>
+task:
+  name: Task one
+  description: First task description
+  group: users 
+  periodicity: 7
+  start_on: <%= today %>
+  create_work_on: <%= today %>
+
+task_for_admin:
+  name: Admin one
+  description: Admin task description
+  group: admins 
+  periodicity: 1
+  start_on: <%= today %>
+  create_work_on: <%= today %>

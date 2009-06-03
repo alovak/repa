@@ -1,0 +1,13 @@
+<% @header = 'Вход в систему' -%>
+
+<div class="page_body">
+  <% form_tag do -%>
+    <dl>
+      <dt>E-mail</dt>
+      <dd><%= text_field_tag :email, params[:email] %></dd>
+      <dt>Пароль</dt>
+      <dd><%= password_field_tag :password, params[:password] %></dd>
+    </dl>
+    <%= submit_tag 'Войти' %>
+  <% end -%>
+</div>

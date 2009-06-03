@@ -1,0 +1,9 @@
+/.*
+*.log
+tmp/**/*
+doc/*
+tmp/*
+config/database.yml
+db/*.sqlite3
+!.git*
+*.vim

@@ -1,0 +1,8 @@
+<% @header = 'Добавление задачи' %>
+<div class="page_body">
+  <%= error_messages_for :object => [@task, @task.periodicity] %>
+  <% form_for(@task) do |f| %>
+    <%= render :partial => f %>
+    <%= render :partial => '/common/create_or_cancel' %>
+  <% end %>
+</div>

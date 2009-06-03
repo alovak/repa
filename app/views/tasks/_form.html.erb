@@ -1,0 +1,15 @@
+<dl>
+  <dt><%= form.label :name %></dt>
+  <dd><%= form.text_field :name %></dd>
+  <dt><%= form.label :description %></dt>
+  <dd><%= form.text_area :description %></dd>
+  <dt><%= form.label :group_id %></dt>
+  <dd><%= form.select :group_id, Group.find(:all).map {|g| [g.name, g.id]}, :prompt => 'Укажите группу для задачи' %></dd>
+
+  <% form.fields_for :periodicity, @task.periodicity do |ff| %>
+  <dt><%= ff.label :periodicity %></dt>
+  <dd><%= ff.select :periodicity , Periodicity.periods, { :prompt => 'Укажите периодичность'  }%></dd>
+  <% end %>
+  <dt><%= form.label :start_on %></dt>
+  <dd><%= form.date_select :start_on %></dd>
+</dl>

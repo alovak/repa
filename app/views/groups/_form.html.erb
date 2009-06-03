@@ -1,0 +1,17 @@
+<dl>
+  <dt><%= form.label :name, 'Название группы' %></dt>
+  <dd><%= form.text_field :name %></dd>
+</dl>
+
+<h2>Access control</h2>
+<dl>
+<% @accessible_controllers.each do |accessible_controller, accessible_actions| -%>
+  <dt><%= content_tag( :strong, accessible_controller ) %></dt>
+  <dd>
+    <% accessible_actions.each do |action| -%>
+      <%= check_box_tag("group[]", action, false, :id => "#{ accessible_controller }_#{ action }") %>
+      <%= label_tag "#{ accessible_controller }_#{ action }", action %>
+    <% end %>
+  </dd>
+<% end -%>
+</dl>

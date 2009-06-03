@@ -1,0 +1,9 @@
+<% @header = 'Редактирование пользователя' %>
+<div class="page_body">
+  <% form_for(@user) do |f| %>
+    <%= f.error_messages %>
+    <p>Оставьте пароль пустым, если не хотите его изменять</p>
+    <%= render :partial => f %>
+    <%= render :partial => '/common/update_or_cancel' %>
+  <% end %>
+</div>

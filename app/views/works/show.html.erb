@@ -1,0 +1,18 @@
+<p>
+  <b>Task:</b>
+  <%=h @work.task_id %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%=h @work.owner_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @work.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_work_path(@work) %> |
+<%= link_to 'Back', works_path %>

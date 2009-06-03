@@ -1,0 +1,5 @@
+<td><%=h work.task.name %></td>
+<td><%=h work.owner.name if work.owner %></td>
+<td><%=h work.status.name %></td>
+<td><%= work.created_at.to_s(:long) %></td>
+<td><%= work.updated_at.to_s(:long) %></td>
