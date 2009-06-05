@@ -1,0 +1,9 @@
+<% @header = 'Add ticket' %>
+
+<div class="page_body">
+  <% form_for(@ticket) do |f| %>
+    <%= f.error_messages %>
+    <%= render :partial => f %>
+    <%= render :partial => '/common/create_or_cancel' %>
+  <% end %>
+</div>

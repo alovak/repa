@@ -1,6 +1,4 @@
 class MyController < ApplicationController
-  layout 'common'
-
   def works
     user = User.find(session[:user_id])
     @works = user.works.search :page =>  params[:page]

@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 
         redirect_to ( uri || { :controller => :works, :action => :index })
       else
+        #TODO change to redirect or flash.now and check this
+
         flash[:notice] = 'Неверная комбинация email-пароль...'
         render :layout => "login"
       end

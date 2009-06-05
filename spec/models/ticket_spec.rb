@@ -4,6 +4,7 @@ describe Ticket do
   before(:each) do
     @valid_attributes = {
     }
+    @ticket = Ticket.new
   end
 
   it "should create a new instance given valid attributes" do

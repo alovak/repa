@@ -1,6 +1,4 @@
 class WorksController < ApplicationController
-  layout 'common'
-
   # GET /works
   # GET /works.xml
   def index

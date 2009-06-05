@@ -1,0 +1,8 @@
+leave           => * -> *
+cancel          => new -> cancelled
+approve         => new -> approved
+accept          => approved, reopened -> implementing
+implement       => reopened, approved, implementing -> implemented
+test            => implemented -> testing
+close           => testing -> closed
+reopen          => testing -> reopened
