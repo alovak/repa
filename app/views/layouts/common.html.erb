@@ -19,6 +19,7 @@
       </p>
     </div>
   <ul id="menu">
+    <%= tab_link('Tickets',{:controller => :tickets, :action => :index}) %>
     <%= tab_link('Мои работы',{:controller => :my, :action => :works}) %>
     <%= tab_link('Работы моих групп', {:controller => :my, :action => :groups_works}) %>
     <% if @current_user.is_admin %>

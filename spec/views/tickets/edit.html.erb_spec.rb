@@ -9,12 +9,15 @@ describe "/tickets/edit.html.erb" do
     )
   end
 
-  it "renders the edit ticket form" do
+  it "should include form partial" do
+    template.should_receive(:render).with(hash_including(:partial => 'form'))
     render
-    
-    response.should have_tag("form[action=#{ticket_path(@ticket)}][method=post]") do
+  end
+
+  it "should contains 'Update' button" do
+    render
+    response.should have_tag("form[action=?][method=post]", ticket_path(@ticket)) do
+      with_tag("input[type=submit][value='Обновить']")
     end
   end
 end
-
-

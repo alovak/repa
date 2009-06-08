@@ -75,6 +75,7 @@ describe TicketsController do
 
   end
 
+
   describe "PUT update" do
 
     describe "with valid params" do
@@ -133,4 +134,44 @@ describe TicketsController do
     end
   end
 
+  describe "PUT change" do
+    it "should change the requested ticket and assign it to @ticket" do
+      Ticket.should_receive(:find).with("1").and_return(mock_ticket)
+      mock_ticket.stub!(:allow_event?)
+      mock_ticket.stub!(:event!)
+      put :change, :id => "1", :ticket => {:action => 'event'}
+      assigns[:ticket].should equal(mock_ticket)
+    end
+
+    it "should redirect to the 'show' template" do
+      Ticket.stub!(:find).and_return(mock_ticket)
+      mock_ticket.stub!(:allow_event?)
+      mock_ticket.stub!(:event!)
+      put :change, :id => "1", :ticket => {:action => 'event'}
+      response.should redirect_to(ticket_url(mock_ticket))
+    end
+    
+    it "should invoke the 'event' action passed in params" do
+      Ticket.stub!(:find).and_return(mock_ticket)
+      mock_ticket.should_receive(:allow_event?).with('event').and_return(true)
+      mock_ticket.should_receive(:event!)
+      put :change, :id => "1", :ticket => {:action => 'event'}
+      flash[:notice].should == 'Ticket was successfully updated'
+    end
+
+    it "should not invoke forbidden or unknow event for ticket" do
+      Ticket.stub!(:find).and_return(mock_ticket)
+      mock_ticket.should_receive(:allow_event?).with('unknown').and_return(false)
+      mock_ticket.should_not_receive(:unknow!)
+      put :change, :id => "1", :ticket => {:action => 'unknown'}
+      flash[:error].should == 'Invalid ticket event'
+    end
+
+    it "should not invoke forbidden or unknow event for empty ticket params" do
+      Ticket.stub!(:find).and_return(mock_ticket)
+      mock_ticket.should_not_receive(:allow_event?)
+      put :change, :id => "1"
+      flash[:error].should == 'Invalid ticket event'
+    end
+  end
 end

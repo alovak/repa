@@ -25,6 +25,10 @@ describe TicketsController do
   it "maps #update" do
     route_for(:controller => "tickets", :action => "update", :id => "1").should == {:path =>"/tickets/1", :method => :put}
   end
+
+  it "maps #change" do
+    route_for(:controller => "tickets", :action => "change", :id => "1").should == {:path =>"/tickets/1/change", :method => :put}
+  end
   
     it "maps #destroy" do
       route_for(:controller => "tickets", :action => "destroy", :id => "1").should == {:path =>"/tickets/1", :method => :delete}
@@ -54,6 +58,10 @@ describe TicketsController do
   
     it "generates params for #update" do
       params_from(:put, "/tickets/1").should == {:controller => "tickets", :action => "update", :id => "1"}
+    end
+
+    it "generates params for #change" do
+      params_from(:put, "/tickets/1/change").should == {:controller => "tickets", :action => "change", :id => "1"}
     end
   
     it "generates params for #destroy" do

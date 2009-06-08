@@ -82,4 +82,15 @@ class TicketsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def change
+    @ticket = Ticket.find(params[:id])
+    if params[:ticket] && @ticket.allow_event?(params[:ticket][:action])
+      @ticket.send(:"#{params[:ticket][:action]}!")
+      flash[:notice] = 'Ticket was successfully updated'
+    else
+      flash[:error] = 'Invalid ticket event'
+    end
+    redirect_to(@ticket)
+  end
 end

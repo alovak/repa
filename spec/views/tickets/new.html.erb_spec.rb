@@ -9,11 +9,15 @@ describe "/tickets/new.html.erb" do
     )
   end
 
-  it "renders new ticket form" do
+  it "should include form partial" do
+    template.should_receive(:render).with(hash_including(:partial => 'form'))
     render
-    
+  end
+
+  it "should contains 'Create' button" do
+    render
     response.should have_tag("form[action=?][method=post]", tickets_path) do
-      response.should have_tag("select#ticket_state")
+      with_tag("input[type=submit][value='Создать']")
     end
   end
 end

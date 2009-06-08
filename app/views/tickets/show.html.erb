@@ -1,3 +1,7 @@
-
+<%= render :partial => @ticket %>
+<% form_for(@ticket, :url => ticket_change_path(@ticket)) do |f| -%>
+  <%= render :partial => 'action' %>
+  <%= f.submit('Изменить') %>
+<% end -%>
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>

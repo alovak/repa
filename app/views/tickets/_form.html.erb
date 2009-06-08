@@ -1,13 +1,8 @@
-<dl>
-  <dt><%= form.label :title %></dt>
-  <dd><%= form.text_field :title %></dd>
-  <dt><%= form.label :state %></dt>
-  <dd><%= form.select :state, [:new, :closed] %></dd>
-  <% [:description, :implementation, :affected_before, 
-      :affected_during, :affected_after, :implementation_risks,
-      :rollback_procedure, :request_alternatives].each do | field | %>
-  <dt><%= form.label field %></dt>
-  <dd><%= form.text_area field, :rows => 2 %></dd>
-  <% end %>
-</dl>
-
+<% form_for(@ticket) do |f| %>
+  <%= f.error_messages %>
+  <dl>
+    <dt><%= f.label :title %></dt>
+    <dd><%= f.text_field :title %></dd>
+  </dl>
+  <%= render :partial => submit_partial %>
+<% end %>
