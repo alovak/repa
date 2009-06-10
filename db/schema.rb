@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090603134325) do
+ActiveRecord::Schema.define(:version => 20090610123236) do
+
+  create_table "changes", :force => true do |t|
+    t.boolean  "assignee_changed"
+    t.integer  "assignee_was"
+    t.integer  "assignee_is"
+    t.boolean  "state_changed"
+    t.integer  "state_was"
+    t.integer  "state_is"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -60,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20090603134325) do
     t.integer  "onwer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "assignee_id"
   end
 
   create_table "users", :force => true do |t|

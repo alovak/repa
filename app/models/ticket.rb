@@ -1,4 +1,6 @@
 class Ticket < ActiveRecord::Base
+  belongs_to :assignee, :class_name => 'User'
+
   include AASM
   aasm_column :state
 

@@ -14,6 +14,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1.xml
   def show
     @ticket = Ticket.find(params[:id])
+    @users  = User.find(:all)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -85,12 +86,19 @@ class TicketsController < ApplicationController
 
   def change
     @ticket = Ticket.find(params[:id])
-    if params[:ticket] && @ticket.allow_event?(params[:ticket][:action])
-      @ticket.send(:"#{params[:ticket][:action]}!")
-      flash[:notice] = 'Ticket was successfully updated'
-    else
+    unless @ticket.allow_event?(params[:ticket_action])
       flash[:error] = 'Invalid ticket event'
+      redirect_to(@ticket) and return
     end
-    redirect_to(@ticket)
+
+    @ticket.attributes = params[:ticket]
+    @ticket.send(:"#{params[:ticket_action]}")
+
+    if @ticket.valid?
+      flash[:notice] = 'Ticket was successfully updated'
+      redirect_to(@ticket)
+    else
+      render :show
+    end
   end
 end

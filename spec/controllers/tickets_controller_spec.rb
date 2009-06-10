@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TicketsController do
-  fixtures :users
+  fixtures :users, :tickets
 
   before do
     session[:user_id] = User.find(:first)
@@ -10,6 +10,10 @@ describe TicketsController do
   def mock_ticket(stubs={})
     @mock_ticket ||= mock_model(Ticket, stubs)
   end
+
+  #def mock_user(stubs={})
+    #@mock_user ||= mock_model(User, stubs)
+  #end
 
   describe "GET index" do
     it "assigns all tickets as @tickets" do
@@ -24,6 +28,15 @@ describe TicketsController do
       Ticket.stub!(:find).with("37").and_return(mock_ticket)
       get :show, :id => "37"
       assigns[:ticket].should equal(mock_ticket)
+    end
+
+    it "assigns all users as @user" do
+      mock_user = User.find(:first)
+      Ticket.stub!(:find).with("37").and_return(mock_ticket)
+      User.should_receive(:find_by_id).and_return(mock_user)
+      User.should_receive(:find).with(:all).and_return([mock_user])
+      get :show, :id => "37"
+      assigns[:users].should eql([mock_user])
     end
   end
 
