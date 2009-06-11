@@ -94,7 +94,7 @@ class TicketsController < ApplicationController
     @ticket.attributes = params[:ticket]
     @ticket.send(:"#{params[:ticket_action]}")
 
-    if @ticket.valid?
+    if @ticket.save
       flash[:notice] = 'Ticket was successfully updated'
       redirect_to(@ticket)
     else

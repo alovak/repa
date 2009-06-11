@@ -1,5 +1,5 @@
-<dt><%= label_tag :action, 'Perform action' %></dt>
+<dt><%= label_tag :action, 'action:' %></dt>
 <dd><%= select_tag 'ticket_action', options_for_select(@ticket.aasm_events_for_current_state) %></dd>
 
-<dt><%= label_tag :assignee, 'Assign ticket to' %></dt>
+<dt><%= label_tag :assignee, 'assigne to:' %></dt>
 <dd><%= collection_select(:ticket, :assignee_id, @users, :id, :name) %></dd>
