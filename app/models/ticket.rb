@@ -17,23 +17,29 @@ class Ticket < ActiveRecord::Base
   aasm_state  :test
   aasm_state  :testing
   aasm_state  :closed
+  aasm_state  :need_plan
+  aasm_state  :planing
+  aasm_state  :planned
 
   aasm_event  :leave do
-    transitions :from => :pending, :to => :pending
-    transitions :from => :new, :to => :new
-    transitions :from => :assigned, :to => :assigned
-    transitions :from => :implementing, :to => :implementing
-    transitions :from => :implemented, :to => :implemented
-    transitions :from => :test, :to => :test
-    transitions :from => :testing, :to => :testing
+  end
+
+  aasm_event  :write_plan do
+    transitions :from => :new, :to => :need_plan
+    transitions :from => :planned, :to => :need_plan
+  end
+
+  aasm_event  :check_plan do
+    transitions :from => :planing, :to => :planned
   end
 
   aasm_event  :approve do
     transitions :from => :pending, :to => :new
   end
 
-  aasm_event  :assign do
+  aasm_event  :implement do
     transitions :from => :new, :to => :assigned
+    transitions :from => :planned, :to => :assigned
   end
 
   aasm_event  :cancel do
@@ -43,6 +49,7 @@ class Ticket < ActiveRecord::Base
   aasm_event  :accept do
     transitions :from => :assigned, :to => :implementing
     transitions :from => :implemented, :to => :testing
+    transitions :from => :need_plan, :to => :planing
   end
 
   aasm_event  :test do
