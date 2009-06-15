@@ -1,7 +1,11 @@
-<%= render :partial => @ticket %>
-<% form_for(@ticket, :url => ticket_change_path(@ticket)) do |f| -%>
-  <%= render :partial => 'action' %>
-  <%= f.submit('Изменить') %>
-<% end -%>
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+<% @header = "Ticket##{ @ticket.id }" %>
+<div class="page_body">
+  <%= render :partial => @ticket %>
+    <%= render :partial => 'action' %>
+    <% unless @ticket.changes.empty? %>
+      <div class="changes">
+        <h2>Changes &amp; comments</h2>
+        <%= render :partial => 'change', :collection => @ticket.changes %>
+      </div>
+    <% end %>
+</div>

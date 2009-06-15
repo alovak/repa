@@ -3,3 +3,27 @@
 <% @page_header_links = capture do %>
   <%= link_to 'Create ticket', new_ticket_path %>
 <% end %>
+
+<div class="page_body">
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <th>Title</th>
+      <th>Assignee</th>
+      <th>State</th>
+      <th>Creator</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+    </tr>
+    <% for ticket in @tickets %>
+      <tr>
+        <td><%=link_to h(ticket.title), ticket %></td>
+        <td><%=h ticket.assignee.try(:name) %></td>
+        <td><%= ticket.state %></td>
+        <td><%=h ticket.owner.name %></td>
+        <td><%= ticket.created_at.to_s(:short) %></td>
+        <td><%= ticket.updated_at.to_s(:short) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @tickets, :class => 'apple_pagination'  %>
+</div>

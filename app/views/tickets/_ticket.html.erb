@@ -1,2 +1,9 @@
-Title: <%= ticket.title %><br/>
-State: <%= ticket.state %>
+<div class="ticket">
+  <div style="float:right; background: #dbdbdb; padding: 5px;">
+    <p class="state">State: <b class="state"><%= ticket.state %></b></p>
+    <p class="state">Assigned to: <b><%= ticket.assignee.try(:name) %></b></p>
+  </div>
+  <h2><%= ticket.title %></h2>
+  <p class="author">Created by <%= ticket.owner.name %>, <%= ticket.created_at.to_s(:short) %></p>
+  <!--<p class="description">AR has two remaining places where string callbacks are still used (most likely occasionally). The attached patch just fixes the typo and avoids string callbacks.</p>-->
+</div>

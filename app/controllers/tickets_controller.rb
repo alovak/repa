@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.xml
   def index
-    @tickets = Ticket.find(:all)
+    @tickets = Ticket.paginate :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +15,7 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find(params[:id])
     @users  = User.find(:all)
+    @change = Change.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,6 +43,7 @@ class TicketsController < ApplicationController
   # POST /tickets.xml
   def create
     @ticket = Ticket.new(params[:ticket])
+    @ticket.owner = current_user
 
     respond_to do |format|
       if @ticket.save
@@ -93,6 +95,12 @@ class TicketsController < ApplicationController
 
     @ticket.attributes = params[:ticket]
     @ticket.send(:"#{params[:ticket_action]}")
+
+    @change = Change.new(params[:change])
+    @change.owner = current_user
+    @change.set_assignees(@ticket)
+    @change.set_state(@ticket)
+    @ticket.changes << @change
 
     if @ticket.save
       flash[:notice] = 'Ticket was successfully updated'

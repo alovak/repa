@@ -6,6 +6,11 @@ BODY {
   padding: 0 20px;
 }
 
+textarea {
+  font-family:"Helvetica Neue",Arial,Helvetica,Tahoma,sans-serif;
+  font-size: 90%;
+}
+
 a {
   color: #3366cc;
 }
@@ -186,7 +191,7 @@ div.page_header h1 {
 div.page_body h2 {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   color: #000;
 }
@@ -228,4 +233,60 @@ div.actions {
 /* EDITING LINKS */
 .edit a {
   color: #ff0000;
+}
+
+.ticket, .action, .changes {
+  padding: 20px;
+}
+
+.change {
+  padding: 20px 0;
+}
+
+.ticket {
+  border-bottom: 1px solid #dbdbdb;
+  background: #f7f7f7;
+}
+
+.ticket .author, .change .author {
+  padding: 0;
+  margin: 2px 0;
+  color: #505050;
+  font-size: 90%;
+}
+.ticket .description {
+  font-size: 95%;
+}
+
+.ticket .assignee {
+}
+
+.ticket .state {
+  padding-top: 2px;
+  margin: 0;
+}
+.ticket .state b {
+  color: #ff2f7d;
+}
+
+.change {
+  border-bottom: 1px solid #dbdbdb;
+
+}
+
+.change  .author {
+  color: #505050;
+  font-size: 90%;
+}
+
+.change .note {
+  font-size: 85%;
+}
+
+.change .comment {
+  padding-top: 10px;
+}
+
+.action {
+  border-bottom: 2px solid #dbdbdb;
 }

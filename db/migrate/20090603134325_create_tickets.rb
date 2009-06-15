@@ -10,7 +10,7 @@ class CreateTickets < ActiveRecord::Migration
                   :rollback_procedure,
                   :request_alternatives
 
-      t.integer   :onwer_id
+      t.integer   :owner_id
 
       t.timestamps
     end

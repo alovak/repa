@@ -12,12 +12,14 @@
 ActiveRecord::Schema.define(:version => 20090610123236) do
 
   create_table "changes", :force => true do |t|
+    t.integer  "owner_id"
+    t.integer  "ticket_id"
     t.boolean  "assignee_changed"
     t.integer  "assignee_was"
     t.integer  "assignee_is"
     t.boolean  "state_changed"
-    t.integer  "state_was"
-    t.integer  "state_is"
+    t.string   "state_was"
+    t.string   "state_is"
     t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -69,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20090610123236) do
     t.text     "implementation_risks"
     t.text     "rollback_procedure"
     t.text     "request_alternatives"
-    t.integer  "onwer_id"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignee_id"
