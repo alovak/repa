@@ -5,6 +5,19 @@
 <% end %>
 
 <div class="page_body">
+  <div class="filter">
+    <% form_tag(tickets_path, :method => :get) do -%>
+      View tickets assigned to:<br/>
+      <%= select_tag 'assignee_id', 
+            options_for_select(
+              [ ["Anyone", ""],
+                ["Me (#{@current_user.name})", @current_user.id],
+                ["-"*12, ""]], @assignee_id) << 
+            options_from_collection_for_select(@users, :id, :name, @assignee_id) 
+      %>
+      <%= observe_field(:assignee_id, :function => "element.form.submit()") %>
+    <% end %>
+  </div>
   <table cellspacing="0" cellpadding="0" border="0">
     <tr>
       <th>Title</th>

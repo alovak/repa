@@ -24,12 +24,12 @@
   document.observe("dom:loaded", function() {
     hide_responsible_for_action($('ticket_action').value);
   });
-  
+
   function hide_responsible_for_action(action) {
     if (['cancel', 'accept', 'close'].include(action)) {
       $('who_is_responsible').hide();
     } else {
       $('who_is_responsible').show();
     }
-  }
+  };
 <% end -%>

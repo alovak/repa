@@ -2,7 +2,11 @@ class TicketsController < ApplicationController
   # GET /tickets
   # GET /tickets.xml
   def index
-    @tickets = Ticket.paginate :page => params[:page]
+    @assignee_id = params[:assignee_id] ? params[:assignee_id].to_i : @current_user.id
+    conditions = { :assignee_id => @assignee_id } unless @assignee_id.zero?
+
+    @tickets = Ticket.paginate :page => params[:page], :conditions => conditions
+    @users = User.find(:all).reject {|user| user.id == @current_user.id}
 
     respond_to do |format|
       format.html # index.html.erb
