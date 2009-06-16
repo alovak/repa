@@ -20,6 +20,7 @@ class Ticket < ActiveRecord::Base
   aasm_state  :need_plan
   aasm_state  :planing
   aasm_state  :planned
+  aasm_state  :reopened
 
   aasm_event  :leave do
   end
@@ -48,6 +49,7 @@ class Ticket < ActiveRecord::Base
 
   aasm_event  :accept do
     transitions :from => :assigned, :to => :implementing
+    transitions :from => :reopened, :to => :implementing
     transitions :from => :implemented, :to => :testing
     transitions :from => :need_plan, :to => :planing
   end
@@ -62,6 +64,10 @@ class Ticket < ActiveRecord::Base
 
   aasm_event  :close do
     transitions :from => :testing, :to => :closed
+  end
+
+  aasm_event  :reopen do
+    transitions :from => :closed, :to => :reopened
   end
 
   def allow_event?(event)
