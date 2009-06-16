@@ -22,9 +22,6 @@ class Ticket < ActiveRecord::Base
   aasm_state  :planned
   aasm_state  :reopened
 
-  aasm_event  :leave do
-  end
-
   aasm_event  :write_plan do
     transitions :from => :new, :to => :need_plan
     transitions :from => :planned, :to => :need_plan
