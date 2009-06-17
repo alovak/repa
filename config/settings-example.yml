@@ -1,0 +1,13 @@
+common_settings: &common_settings
+  :project: 
+    :host: repa
+    :protocol: http
+  email_from: repa@repa.com
+  email_reply: repa@repa.com
+
+development:
+  <<: *common_settings
+test: 
+  <<: *common_settings
+production:
+  <<: *common_settings
