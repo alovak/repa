@@ -97,7 +97,7 @@ class TicketsController < ApplicationController
     @change = Change.new(params[:change])
     @change.owner = current_user
 
-    if params[:ticket_action] and @ticket.allow_event?(params[:ticket_action])
+    if params[:ticket_action] && @ticket.allow_event?(params[:ticket_action])
       @ticket.send(:"#{params[:ticket_action]}")
       @change.set_assignees(@ticket)
       @change.set_state(@ticket)

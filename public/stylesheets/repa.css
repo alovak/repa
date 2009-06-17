@@ -254,6 +254,13 @@ div.actions {
   color: #505050;
   font-size: 90%;
 }
+
+.ticket .info {
+  float:right; 
+  background: #dbdbdb; 
+  padding: 5px;
+}
+
 .ticket .description {
   font-size: 95%;
 }

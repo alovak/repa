@@ -1,5 +1,8 @@
 class Change < ActiveRecord::Base
   belongs_to :owner, :class_name => 'User'
+  belongs_to :assigne_id, :class_name => 'User'
+  belongs_to :assigne_was, :class_name => 'User'
+
   default_scope :order => 'created_at DESC'
 
   def set_assignees(ticket)
