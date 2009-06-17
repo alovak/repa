@@ -92,24 +92,24 @@ class TicketsController < ApplicationController
 
   def change
     @ticket = Ticket.find(params[:id])
-    unless @ticket.allow_event?(params[:ticket_action])
-      flash[:error] = 'Invalid ticket event'
-      redirect_to(@ticket) and return
-    end
 
     @ticket.attributes = params[:ticket]
-    @ticket.send(:"#{params[:ticket_action]}")
-
     @change = Change.new(params[:change])
     @change.owner = current_user
-    @change.set_assignees(@ticket)
-    @change.set_state(@ticket)
+
+    if params[:ticket_action] and @ticket.allow_event?(params[:ticket_action])
+      @ticket.send(:"#{params[:ticket_action]}")
+      @change.set_assignees(@ticket)
+      @change.set_state(@ticket)
+    end
+
     @ticket.changes << @change
 
     if @ticket.save
       flash[:notice] = 'Ticket was successfully updated'
       redirect_to(@ticket)
     else
+      flash.now[:error] = 'Ticket was not saved'
       render :show
     end
   end

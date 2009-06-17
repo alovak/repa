@@ -3,6 +3,8 @@ class Ticket < ActiveRecord::Base
   belongs_to  :owner, :class_name => 'User'
   has_many    :changes
 
+  default_scope :order => 'updated_at DESC'
+
   include AASM
   aasm_column :state
 

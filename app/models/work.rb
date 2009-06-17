@@ -19,7 +19,6 @@ class Work < ActiveRecord::Base
               :conditions => args[:conditions]
   end
 
-  self
   def auto_close(owner_id)
     Work.record_timestamps = false
     self.updated_at = Rand.period_date( self.created_at, task.periodicity.periodicity )
