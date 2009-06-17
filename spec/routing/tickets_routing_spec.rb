@@ -18,17 +18,17 @@ describe TicketsController do
       route_for(:controller => "tickets", :action => "edit", :id => "1").should == "/tickets/1/edit"
     end
 
-  it "maps #create" do
-    route_for(:controller => "tickets", :action => "create").should == {:path => "/tickets", :method => :post}
-  end
+    it "maps #create" do
+      route_for(:controller => "tickets", :action => "create").should == {:path => "/tickets", :method => :post}
+    end
 
-  it "maps #update" do
-    route_for(:controller => "tickets", :action => "update", :id => "1").should == {:path =>"/tickets/1", :method => :put}
-  end
+    it "maps #update" do
+      route_for(:controller => "tickets", :action => "update", :id => "1").should == {:path =>"/tickets/1", :method => :put}
+    end
 
-  it "maps #change" do
-    route_for(:controller => "tickets", :action => "change", :id => "1").should == {:path =>"/tickets/1/change", :method => :put}
-  end
+    it "maps #change" do
+      route_for(:controller => "tickets", :action => "change", :id => "1").should == {:path =>"/tickets/1/change", :method => :put}
+    end
   
     it "maps #destroy" do
       route_for(:controller => "tickets", :action => "destroy", :id => "1").should == {:path =>"/tickets/1", :method => :delete}
