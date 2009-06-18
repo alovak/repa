@@ -5,8 +5,8 @@ class CreateChangesTable < ActiveRecord::Migration
       t.integer :ticket_id
 
       t.boolean :assignee_changed
-      t.integer :assignee_was
-      t.integer :assignee_is
+      t.integer :assignee_was_id
+      t.integer :assignee_is_id
 
       t.boolean :state_changed
       t.string  :state_was

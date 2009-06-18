@@ -103,9 +103,7 @@ class TicketsController < ApplicationController
       @change.set_state(@ticket)
     end
 
-    @ticket.changes << @change
-
-    if @ticket.save
+    if @ticket.save && (@ticket.changes << @change)
       flash[:notice] = 'Ticket was successfully updated'
       redirect_to(@ticket)
     else
