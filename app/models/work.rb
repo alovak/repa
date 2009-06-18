@@ -1,5 +1,5 @@
 class Work < ActiveRecord::Base
-  composed_of (:status) {|params| Status.new(params[:status].to_i)}
+  composed_of (:status), :converter => Proc.new{|params| Status.new(params[:status].to_i)}
 
   belongs_to :task
   belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'

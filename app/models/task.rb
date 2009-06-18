@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to  :group
   has_many    :works, :dependent => :delete_all
-  composed_of (:periodicity) {|params| Periodicity.new(params[:periodicity])}
+  composed_of (:periodicity), :converter => Proc.new {|params| Periodicity.new(params[:periodicity])}
 
   validates_presence_of :name, :description, :group_id, :start_on
   validates_length_of   :name, :maximum => 50
