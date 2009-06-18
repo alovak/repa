@@ -4,6 +4,13 @@ class Symbol
   end
 end
 
+class Array
+  # Ruby 1.8.5 doesn't have count method
+  def count
+    self.size
+  end
+end
+
 class Hash
   def deep_symbolize_keys
       self.inject({}) do |result, (key, value)|
