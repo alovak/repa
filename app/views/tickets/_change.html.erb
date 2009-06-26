@@ -6,5 +6,5 @@
   <% if change.state_changed? && change.state_was != change.state_is %>
     <div class="note">&#x2192; State chaged from <b><%= change.state_was %></b> to <b><%= change.state_is %></b></div>
   <% end %>
-  <div class="comment"><%= change.comment %></div>
+  <div class="comment"><%= simple_format(change.comment) %></div>
 </div>
