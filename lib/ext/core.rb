@@ -9,6 +9,10 @@ class Array
   def count
     self.size
   end
+
+  def collect_non_nil(&block)
+    collect {|item| block.call(item)}.delete_if {|item| item.nil?}
+  end
 end
 
 class Hash
