@@ -1,4 +1,11 @@
 <% @header = 'Работы' %>
 <div class="page_body">
+  <div class="filter">
+    <% form_tag(works_path, :method => :get) do -%>
+      View works with status:<br/>
+      <%= select_tag 'status_id', options_for_select([["Any", ""], ["-"*10, ""]] + Status::OPTIONS, @status_id) %>
+      <%= observe_field(:status_id, :function => "element.form.submit()") %>
+    <% end %>
+  </div>
   <%= render :partial => 'manage_works', :locals => {:works => @works} %>
 </div>

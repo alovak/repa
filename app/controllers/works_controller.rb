@@ -2,7 +2,13 @@ class WorksController < ApplicationController
   # GET /works
   # GET /works.xml
   def index
-    @works = Work.search(:page => params[:page])
+    
+    if params[:status_id]
+      @status_id = params[:status_id].to_i
+      conditions = { :status => Status.new(@status_id) }
+    end
+
+    @works = Work.paginate :page => params[:page], :conditions => conditions
 
     respond_to do |format|
       format.html # index.html.erb
