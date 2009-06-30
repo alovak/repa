@@ -1,12 +1,23 @@
 class MyController < ApplicationController
   def works
     user = User.find(session[:user_id])
-    @works = user.works.search :page =>  params[:page]
+
+    if params[:status_id]
+      @status_id = params[:status_id].to_i
+      conditions = { :status => Status.new(@status_id) }
+    end
+
+    @works = user.works.search(:page =>  params[:page], :conditions => conditions)
   end
 
   def groups_works
+    if params[:status_id]
+      @status_id = params[:status_id].to_i
+      conditions = { :status => Status.new(@status_id) }
+    end
+
     user = User.find(session[:user_id])
-    @works = user.groups_works :page => params[:page]
+    @works = user.groups_works(:page => params[:page], :conditions => conditions)
   end
 
   def create_missed_works

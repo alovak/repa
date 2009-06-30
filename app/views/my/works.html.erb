@@ -1,4 +1,5 @@
 <% @header = 'Мои работы' %>
 <div class="page_body">
+  <%= render :partial => 'works/filter', :locals => {:filter_url => {:controller => :my, :action => :works},:status_id => @status_id} %>
   <%= render :partial => 'works/view_works', :locals => {:works => @works} %>
 </div>

@@ -25,7 +25,9 @@ class User < ActiveRecord::Base
   end
 
   def groups_works(args = {})
-    Work.search( :page => args[:page], :conditions => ["group_id IN (?)", group_ids] )
+    conditions = {:group_id =>  group_ids}
+    conditions.update(args[:conditions]) if args[:conditions]
+    Work.search( :page => args[:page], :conditions => conditions )
   end
 
   def password=(pwd)

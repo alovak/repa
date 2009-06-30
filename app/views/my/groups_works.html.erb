@@ -1,5 +1,6 @@
 <% @header = 'Работы моих групп' %>
 <div class="page_body">
+  <%= render :partial => 'works/filter', :locals => {:filter_url => {:controller => :my, :action => :groups_works}, :status_id => @status_id} %>
   <%= render :partial => 'works/view_works', :locals => {:works => @works} %>
 </div>
 

@@ -1,0 +1,7 @@
+<div class="filter">
+  <% form_tag(filter_url, :method => :get) do -%>
+    View works with status:<br/>
+    <%= select_tag 'status_id', options_for_select([["Any", ""], ["-"*10, ""]] + Status::OPTIONS, status_id) %>
+    <%= observe_field(:status_id, :function => "element.form.submit()") %>
+  <% end %>
+</div>
