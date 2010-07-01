@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :tickets do |ticket|
   end
-  
+
   map.ticket_change 'tickets/:id/change', :controller => 'tickets', :action => 'change', :conditions => { :method => :put }
 
   map.resources :tasks
@@ -13,10 +13,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :works
 
   # The priority is based upon order of creation: first created -> highest priority.
-  
+
   map.connect 'login',  :controller => 'users', :action => 'login'
   map.connect 'logout', :controller => 'users', :action => 'logout'
   map.connect 'generate-missed-works', :controller => 'my', :action => 'create_missed_works'
+  map.connect 'close-works', :controller => 'my', :action => 'close_works'
 
   # map.connect '/my/:action/', :controller => 'my'
   # Sample of regular route:
@@ -35,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments

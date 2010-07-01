@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20090610123236) do
   add_index "groups_users", ["user_id"], :name => "index_groups_users_on_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"

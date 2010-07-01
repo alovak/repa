@@ -5,12 +5,15 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :name, :description, :group_id, :start_on
   validates_length_of   :name, :maximum => 50
-  validates_length_of   :description, :maximum => 2048 
+  validates_length_of   :description, :maximum => 2048
 
   validates_associated  :group
   validates_associated  :periodicity, :message => nil
 
   attr_protected  :create_work_on
+
+  cattr_reader :per_page
+  @@per_page = 100
 
   def before_create
     self.create_work_on = start_on
@@ -22,14 +25,14 @@ class Task < ActiveRecord::Base
 
   def create_work
     work = Work.create(:task => self, :owner => nil, :group => group, :status => {:status => 1}, :created_at => create_work_on.to_datetime)
-    update_attribute(:create_work_on,self.create_work_on + self.periodicity.periodicity) 
+    update_attribute(:create_work_on,self.create_work_on + self.periodicity.periodicity)
     work
   end
 
   def self.create_missed_works
     works_count = 0
-    while !(tasks = Task.find_tasks_for_works).empty? 
-      tasks.each do |task| 
+    while !(tasks = Task.find_tasks_for_works).empty?
+      tasks.each do |task|
         task.create_work
         works_count += 1
       end

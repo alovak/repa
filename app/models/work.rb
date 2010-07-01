@@ -7,15 +7,18 @@ class Work < ActiveRecord::Base
 
   validates_associated :status
 
+  cattr_reader :per_page
+  @@per_page = 100
+
   def before_update
     self.owner = nil if self.status.name == 'new'
   end
 
   def self.search(args = {})
-    paginate  :all, 
-              :include => [:owner, :task, :group], 
-              :page => args[:page], :per_page => 15, 
-              :order => 'created_at DESC', 
+    paginate  :all,
+              :include => [:owner, :task, :group],
+              :page => args[:page],
+              :order => 'created_at DESC',
               :conditions => args[:conditions]
   end
 
