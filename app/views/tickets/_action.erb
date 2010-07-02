@@ -1,8 +1,8 @@
 <div class="action">
   <% form_tag(ticket_change_path(@ticket), :method => :put) do -%>
   <h2>Update and comment the ticket</h2>
-  <%= render :partial => 'implementer_fields' if @ticket.state == 'assigned' %>
   <% if @ticket.assignee.nil? or @ticket.assignee == @current_user %>
+    <%= render :partial => 'implementer_fields' if @ticket.state == 'assigned' %>
     <p>
       <%= label_tag :ticket_action, 'action' %>
       <%= select_tag 'ticket_action', options_for_select(@ticket.aasm_events_for_current_state) %>
