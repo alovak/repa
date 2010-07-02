@@ -9,9 +9,10 @@ describe "/tickets/_form.html.erb" do
   it "should contains form fields" do
     render :partial => 'tickets/form', :locals => {:ticket => @ticket, :submit_partial => '/common/create_or_cancel'}
 
+    puts response.body
     response.should have_tag("form[action=#{ticket_path(@ticket)}][method=post]") do
       with_tag("input#ticket_title")
+      with_tag("textarea#ticket_description")
     end
   end
 end
-

@@ -3,6 +3,8 @@
   <dl>
     <dt><%= f.label :title %></dt>
     <dd><%= f.text_field :title %></dd>
+    <dt><%= f.label :description %></dt>
+    <dd><%= f.text_area :description %></dd>
   </dl>
   <%= render :partial => submit_partial %>
 <% end %>

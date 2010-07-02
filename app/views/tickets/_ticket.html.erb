@@ -4,5 +4,15 @@
     <p class="state">Assigned to: <b><%= ticket.assignee.try(:name) %></b></p>
   </div>
   <h2><%= ticket.title %></h2>
+  <p class="description"><%= ticket.description %></p>
+
+  <% if ticket.impact %>
+    <p class="impact"><%= ticket.impact %></p>
+  <% end %>
+
+  <% if ticket.rollback_process %>
+    <p class="rollback_process"><%= ticket.rollback_process %></p>
+  <% end %>
+
   <p class="author">Created by <%= ticket.owner.name %>, <%= ticket.created_at.to_s(:short) %></p>
 </div>
