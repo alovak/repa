@@ -3,6 +3,10 @@ class Ticket < ActiveRecord::Base
   belongs_to  :owner, :class_name => 'User'
   has_many    :changes
 
+  validates_presence_of :description, :title
+
+  validates_presence_of :impact, :rollback_process, :if => "state == 'implementing'"
+
   default_scope :order => 'updated_at DESC'
 
   include AASM

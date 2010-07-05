@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_filter :set_users
   # GET /tickets
   # GET /tickets.xml
   def index
@@ -6,7 +7,6 @@ class TicketsController < ApplicationController
     conditions = { :assignee_id => @assignee_id } unless @assignee_id.zero?
 
     @tickets = Ticket.paginate :page => params[:page], :conditions => conditions
-    @users = User.find(:all).reject {|user| user.id == @current_user.id}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,6 @@ class TicketsController < ApplicationController
   # GET /tickets/1.xml
   def show
     @ticket = Ticket.find(params[:id])
-    @users  = User.find(:all)
     @change = Change.new
 
     respond_to do |format|
@@ -98,7 +97,7 @@ class TicketsController < ApplicationController
     @change.owner = current_user
 
     if params[:ticket_action] && @ticket.allow_event?(params[:ticket_action])
-      @ticket.send(:"#{params[:ticket_action]}")
+      @ticket.send(:"#{params[:ticket_action]}!")
       @change.set_assignees(@ticket)
       @change.set_state(@ticket)
     end
@@ -110,5 +109,11 @@ class TicketsController < ApplicationController
       flash.now[:error] = 'Ticket was not saved'
       render :show
     end
+  end
+
+  private
+
+  def set_users
+    @users = User.find(:all)#.reject {|user| user.id == @current_user.id}
   end
 end

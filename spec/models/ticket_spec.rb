@@ -4,6 +4,24 @@ describe Ticket do
   let(:ticket) { stub_model(Ticket) }
   let(:current_user) { mock() }
 
+  it { should validate_presence_of(:description) }
+  it { should validate_presence_of(:title) }
+
+  context "when state is assigned" do
+    before { subject.stub(:state => 'implementing') }
+
+    it { should validate_presence_of(:impact) }
+    it { should validate_presence_of(:rollback_process) }
+  end
+
+  context "when state is not assigned" do
+    before { subject.stub(:state => 'pending') }
+
+    it { should_not validate_presence_of(:impact) }
+    it { should_not validate_presence_of(:rollback_process) }
+  end
+
+
   context "when assignee is a current_user" do
     before do
       ticket.stub(:assignee => current_user)
