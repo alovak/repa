@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100702124049) do
+ActiveRecord::Schema.define(:version => 20100705213513) do
 
   create_table "changes", :force => true do |t|
     t.integer  "owner_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20100702124049) do
     t.integer  "assignee_id"
     t.text     "impact"
     t.text     "rollback_process"
+    t.text     "comment"
   end
 
   create_table "users", :force => true do |t|

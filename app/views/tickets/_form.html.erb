@@ -1,10 +1,16 @@
-<% form_for(@ticket) do |f| %>
+<% form_for(ticket) do |f| %>
   <%= f.error_messages %>
   <dl>
     <dt><%= f.label :title %></dt>
     <dd><%= f.text_field :title %></dd>
     <dt><%= f.label :description %></dt>
     <dd><%= f.text_area :description %></dd>
+    <dt><%= f.label :comment %></dt>
+    <dd><%= f.text_area :comment %></dd>
+    <dt><%= f.label :event, 'action' %></dt>
+    <dd><%= f.select :event, ticket.aasm_events_for_current_state %></dd>
+    <dt><%= f.label :assignee_id, "who's responsible" %></dt>
+    <dd><%= f.select :assignee_id, User.all.collect {|user| [user.name, user.id]} %></dd>
   </dl>
   <%= render :partial => submit_partial %>
 <% end %>

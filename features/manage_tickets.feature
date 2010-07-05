@@ -17,16 +17,17 @@ Feature:
     And I fill in the following:
       | Title       | Job title       |
       | Description | Job description |
-    And I press "Создать"
-    Then I should see "Ticket was successfully created"
-
-    Then I should see "Job title"
-    And I should see "Job description"
-
-    When I select "approve" from "action"
+      | Comment     | Comment text    |
+    And select "approve" from "action"
     And select "Bill Gates" from "who's responsible"
-    And fill in "comment" with "First comment"
-    And press "Обновить"
+    And press "Create"
+
+    Then I should see "Ticket was successfully created"
+    And should see "Job title" within ".ticket .title"
+    And should see "Job description" within ".ticket .description"
+    And should see "new" within ".ticket .state"
+    And should see "Bill Gates" within ".ticket .assignee"
+
 
   Scenario: approve the ticket and assign a user to implement job
     Given the following ticket exists:

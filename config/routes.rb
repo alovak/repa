@@ -1,8 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :tickets do |ticket|
-  end
+#  map.resources :tickets do |ticket|
+#  end
 
-  map.ticket_change 'tickets/:id/change', :controller => 'tickets', :action => 'change', :conditions => { :method => :put }
+#  map.ticket_change 'tickets/:id/change', :controller => 'tickets', :action => 'change', :conditions => { :method => :put }
+
+  map.resources :tickets
 
   map.resources :tasks
 
