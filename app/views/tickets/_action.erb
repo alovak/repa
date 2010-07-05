@@ -1,7 +1,7 @@
 <div class="action">
   <% form_tag(ticket_change_path(@ticket), :method => :put) do -%>
   <h2>Update and comment the ticket</h2>
-  <% if @ticket.assignee.nil? or @ticket.assignee == @current_user %>
+  <% if @ticket.changeable_by?(@current_user) %>
     <%= render :partial => 'implementer_fields' if @ticket.state == 'assigned' %>
     <p>
       <%= label_tag :ticket_action, 'action' %>

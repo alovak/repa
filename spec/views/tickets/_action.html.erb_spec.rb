@@ -4,14 +4,15 @@ describe "/tickets/_action" do
 
   before do
     assigns[:ticket] = ticket
+    assigns[:users] = []
     comment = mock_model(Comment).as_new_record
     assigns[:change] = mock_model(Change, :comment => comment).as_new_record
     assigns[:comment] = comment
   end
 
-  context "when ticket state is assigned" do
+  context "when ticket state is assigned and ticket is changeble by current user" do
     before do
-      ticket.stub(:state => 'assigned')
+      ticket.stub(:state => 'assigned', :changeable_by? => true)
     end
 
     it "should render partial with additional params" do

@@ -73,5 +73,3 @@ Feature:
 
     Then I should see "impact description" within ".ticket .impact"
     And should see "description of the rollback process" within ".ticket .rollback_process"
-
-    Then show me the page

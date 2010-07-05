@@ -72,4 +72,9 @@ class Ticket < ActiveRecord::Base
   def allow_event?(event)
     aasm_events_for_current_state.include?(event.to_sym)
   end
+
+
+  def changeable_by?(user)
+    (assignee == user) || (assignee.nil? && (owner == user))
+  end
 end
