@@ -9,20 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100705213513) do
+ActiveRecord::Schema.define(:version => 20100706135548) do
 
   create_table "changes", :force => true do |t|
     t.integer  "owner_id"
     t.integer  "ticket_id"
     t.boolean  "assignee_changed"
-    t.integer  "assignee_was_id"
-    t.integer  "assignee_is_id"
+    t.integer  "assignee_id_was"
+    t.integer  "assignee_id_is"
     t.boolean  "state_changed"
     t.string   "state_was"
     t.string   "state_is"
-    t.text     "comment"
+    t.text     "comment_is"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "comment_was"
   end
 
   create_table "groups", :force => true do |t|

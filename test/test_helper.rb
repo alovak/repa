@@ -6,7 +6,7 @@ require 'mocha'
 
 class ActionController::TestCase
   def skip_login
-    @controller.send('current_user=', users(:user))
+    @controller.instance_variable_set("@current_user", users(:user))
     @controller.class.skip_filter :authorize
   end
 end
@@ -24,7 +24,7 @@ class ActiveSupport::TestCase
   # don't care one way or the other, switching from MyISAM to InnoDB tables
   # is recommended.
   #
-  # The only drawback to using transactional fixtures is when you actually 
+  # The only drawback to using transactional fixtures is when you actually
   # need to test transactions.  Since your test is bracketed by a transaction,
   # any transactions started in your code will be automatically rolled back.
   self.use_transactional_fixtures = true
@@ -44,8 +44,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   #def assert_invalid(model, attribute, message, message_value = nil)
-    #assertion = model.errors.on(attribute).to_a.include?( full_message(message) % message_value ) 
-    #assert( assertion, model.errors.on(attribute) )  
+    #assertion = model.errors.on(attribute).to_a.include?( full_message(message) % message_value )
+    #assert( assertion, model.errors.on(attribute) )
   #end
 
   #def full_message(message)

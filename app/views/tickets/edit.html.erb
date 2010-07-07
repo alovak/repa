@@ -1,4 +1,7 @@
 <% @header = 'Edit ticket' %>
 <div class="page_body">
   <%= render  :partial => 'form', :locals => { :ticket => @ticket, :submit_partial => '/common/update_or_cancel' } %>
+  <div class="changes">
+    <%= render :partial => 'change', :collection => @ticket.changes %>
+  </div>
 </div>

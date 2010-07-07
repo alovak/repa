@@ -1,23 +1,16 @@
+# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/tickets/edit.html.erb" do
   include TicketsHelper
-  
+
   before(:each) do
-    assigns[:ticket] = @ticket = stub_model(Ticket,
-      :new_record? => false
-    )
+    assigns[:ticket] = @ticket = mock_model(Ticket, :null_object => true)
   end
 
-  it "should include form partial" do
+  it "should include partials" do
     template.should_receive(:render).with(hash_including(:partial => 'form'))
+    template.should_receive(:render).with(hash_including(:partial => 'change'))
     render
-  end
-
-  it "should contains 'Update' button" do
-    render
-    response.should have_tag("form[action=?][method=post]", ticket_path(@ticket)) do
-      with_tag("input[type=submit][value='Обновить']")
-    end
   end
 end

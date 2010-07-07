@@ -8,12 +8,12 @@
   <div class="filter">
     <% form_tag(tickets_path, :method => :get) do -%>
       View tickets assigned to:<br/>
-      <%= select_tag 'assignee_id', 
+      <%= select_tag 'assignee_id',
             options_for_select(
               [ ["Anyone", ""],
                 ["Me (#{@current_user.name})", @current_user.id],
-                ["-"*12, ""]], @assignee_id) << 
-            options_from_collection_for_select(@users, :id, :name, @assignee_id) 
+                ["-"*12, ""]], @assignee_id) <<
+            options_from_collection_for_select(@users, :id, :name, @assignee_id)
       %>
       <%= observe_field(:assignee_id, :function => "element.form.submit()") %>
     <% end %>
@@ -29,7 +29,7 @@
     </tr>
     <% for ticket in @tickets %>
       <tr>
-        <td><%=link_to h(ticket.title), ticket %></td>
+        <td><%=link_to h(ticket.title), edit_ticket_path(ticket) %></td>
         <td><%=h ticket.assignee.try(:name) %></td>
         <td><%= ticket.state %></td>
         <td><%=h ticket.owner.name %></td>

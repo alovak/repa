@@ -5,7 +5,8 @@ Factory.define :user do |u|
 end
 
 Factory.define :ticket do |t|
-  t.description 'Ticket description'
+  t.sequence(:title) {|n| "Title #{n}"}
+  t.sequence(:description) {|n| "Description #{n}"}
   t.association :assignee, :factory => :user
   t.association :owner,    :factory => :user
 end

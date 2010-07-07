@@ -16,15 +16,15 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1
   # GET /tickets/1.xml
-  def show
-    @ticket = Ticket.find(params[:id])
-    @change = Change.new
+  # def show
+  #   @ticket = Ticket.find(params[:id])
+  #   @change = Change.new
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @ticket }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # show.html.erb
+  #     format.xml  { render :xml => @ticket }
+  #   end
+  # end
 
   # GET /tickets/new
   # GET /tickets/new.xml
@@ -51,7 +51,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.save
         flash[:notice] = 'Ticket was successfully created.'
-        format.html { redirect_to(@ticket) }
+        format.html { redirect_to(edit_ticket_path(@ticket)) }
         format.xml  { render :xml => @ticket, :status => :created, :location => @ticket }
       else
         format.html { render :action => "new" }
@@ -68,7 +68,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
         flash[:notice] = 'Ticket was successfully updated.'
-        format.html { redirect_to(@ticket) }
+        format.html { redirect_to(edit_ticket_path(@ticket)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

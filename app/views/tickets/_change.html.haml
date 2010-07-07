@@ -1,0 +1,9 @@
+.change
+  .state_was= change.state_was
+  .state_is= change.state_is
+  - if change.assignee_was
+    .assignee_was= change.assignee_was.name
+  - if change.assignee_is
+    .assignee_is= change.assignee_is.name
+  - unless change.comment_is.blank?
+    .comment= change.comment_is

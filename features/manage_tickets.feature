@@ -25,10 +25,10 @@ Feature:
     Then I should see "Ticket was successfully created"
     And should see "Job title" within ".ticket .title"
     And should see "Job description" within ".ticket .description"
+    And should see "John Doe" within ".ticket .owner"
     And should see "new" within ".ticket .state"
     And should see "Bill Gates" within ".ticket .assignee"
 
-
   Scenario: approve the ticket and assign a user to implement job
     Given the following ticket exists:
       | title     | state | assignee         | owner          |
@@ -39,24 +39,16 @@ Feature:
     And follow "Job title"
     And select "implement" from "action"
     And select "Steve Jobs" from "who's responsible"
-    And press "Обновить"
+    And press "Update"
     Then I should see "Ticket was successfully updated"
-    And should see "Steve Jobs" within ".ticket .info"
-
-  Scenario: approve the ticket and assign a user to implement job
-    Given the following ticket exists:
-      | title     | state | assignee         | owner          |
-      | Job title | new   | name: Bill Gates | name: John Doe |
-
-    When I log in as "bill@example.com" with "12345"
-    And follow "Tickets"
-    And follow "Job title"
-    And select "implement" from "action"
-    And select "Steve Jobs" from "who's responsible"
-    And press "Обновить"
-    Then I should see "Ticket was successfully updated"
-    And should see "Steve Jobs" within ".ticket .info"
     And should see "assigned" within ".ticket .state"
+    And should see "Steve Jobs" within ".ticket .assignee"
+
+    And should see "new" within ".changes .change .state_was"
+    And should see "assigned" within ".changes .change .state_is"
+    And should see "Bill Gates" within ".changes .change .assignee_was"
+    And should see "Steve Jobs" within ".changes .change .assignee_is"
+
 
   Scenario: start ticket implementation
     Given the following ticket exists:
@@ -70,7 +62,14 @@ Feature:
       | Impact           | impact description                  |
       | Rollback process | description of the rollback process |
     And select "accept" from "action"
-    And press "Обновить"
+    And press "Update"
 
-    Then I should see "impact description" within ".ticket .impact"
+    Then I should see "Ticket was successfully updated"
+    And should see "impact description" within ".ticket .impact"
     And should see "description of the rollback process" within ".ticket .rollback_process"
+
+    And should see "implementing" within ".ticket .state"
+    And should see "Steve Jobs" within ".ticket .assignee"
+
+    And should see "assigned" within ".changes .change .state_was"
+    And should see "implementing" within ".changes .change .state_is"

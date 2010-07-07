@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/tickets/new.html.erb" do
   include TicketsHelper
-  
+
   before(:each) do
     assigns[:ticket] = stub_model(Ticket,
       :new_record? => true
@@ -17,9 +17,7 @@ describe "/tickets/new.html.erb" do
   it "should contains 'Create' button" do
     render
     response.should have_tag("form[action=?][method=post]", tickets_path) do
-      with_tag("input[type=submit][value='Создать']")
+      with_tag("input[type=submit][value='Create']")
     end
   end
 end
-
-

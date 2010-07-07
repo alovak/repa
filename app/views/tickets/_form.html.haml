@@ -1,0 +1,29 @@
+- form_for(ticket) do |f|
+  = f.error_messages
+  %dl.ticket
+    - if ticket.new_record?
+      %dt= f.label :title
+      %dd= f.text_field :title
+      %dt= f.label :description
+      %dd= f.text_area :description
+    - else
+      - %w(title description state).each do |attr|
+        %dd{:class => attr}= ticket.send(attr.to_sym)
+      %dt.owner= ticket.owner.name
+      %dd.assignee= ticket.assignee.name
+    - if ticket.state == 'assigned'
+      %dt= f.label :impact
+      %dd= f.text_area :impact
+      %dt= f.label :rollback_process
+      %dd= f.text_area :rollback_process
+    - if ticket.impact && ticket.rollback_process
+      - %w(impact rollback_process).each do |attr|
+        %dl= attr
+        %dd{:class => attr}= ticket.send(attr.to_sym)
+    %dt= f.label :comment
+    %dd= f.text_area :comment
+    %dt= f.label :event, 'action'
+    %dd= f.select :event, ticket.aasm_events_for_current_state
+    %dt= f.label :assignee_id, "who's responsible"
+    %dd= f.select :assignee_id, User.all.collect {|user| [user.name, user.id]}
+  = render :partial => submit_partial

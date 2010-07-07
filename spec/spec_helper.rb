@@ -46,4 +46,9 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  # skip login procedure
+  config.before(:each, :type => :controller) do
+    controller.stub(:current_user => stub_model(User))
+  end
 end

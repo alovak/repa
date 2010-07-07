@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     ]
     from          SETTINGS[:email_from]
     subject       "Ticket ##{change.ticket.id} was changed"
-    body          :change => change
+    body          :change => change, :ticket => change.ticket
     content_type  'text/plain'
   end
 end

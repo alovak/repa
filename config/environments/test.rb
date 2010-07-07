@@ -25,3 +25,4 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 config.gem "remarkable_rails", :lib => false
+config.gem 'factory_girl'

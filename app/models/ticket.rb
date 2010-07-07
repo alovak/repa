@@ -7,7 +7,7 @@ class Ticket < ActiveRecord::Base
 
   validates_presence_of :description, :title
 
-  validates_presence_of :impact, :rollback_process, :if => "state == 'implementing'"
+  validates_presence_of :impact, :rollback_process, :if => "event == 'accept'"
 
   default_scope :order => 'updated_at DESC'
 
@@ -75,12 +75,19 @@ class Ticket < ActiveRecord::Base
     transitions :from => :closed, :to => :reopened
   end
 
+  before_save :call_event
+
   def allow_event?(event)
     aasm_events_for_current_state.include?(event.to_sym)
   end
 
-
   def changeable_by?(user)
     (assignee == user) || (assignee.nil? && (owner == user))
+  end
+
+  private
+
+  def call_event
+    send(:"#{event}") unless event.blank?
   end
 end
