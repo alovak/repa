@@ -60,9 +60,17 @@ describe "/tickets/_form.html.erb" do
         render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
         response.should have_tag(".ticket") do
-          with_tag("textarea[name=?]", 'ticket[impact]')
-          with_tag("textarea[name=?]", 'ticket[rollback_process]')
+          without_tag("dd.impact")
+          without_tag("dd.rollback_process")
         end
+      end
+    end
+
+    context "when impact and rollback_process are blank" do
+      before { ticket.stub(:impact => '', :rollback_process => '') }
+
+      it "should not contain impact and rollback lables" do
+        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
       end
     end
 

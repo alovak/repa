@@ -16,7 +16,7 @@
       %dd= f.text_area :impact
       %dt= f.label :rollback_process
       %dd= f.text_area :rollback_process
-    - if ticket.impact && ticket.rollback_process
+    - if !ticket.impact.blank? && !ticket.rollback_process.blank?
       - %w(impact rollback_process).each do |attr|
         %dl= attr
         %dd{:class => attr}= ticket.send(attr.to_sym)
