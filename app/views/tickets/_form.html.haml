@@ -21,7 +21,7 @@
         %dl= attr
         %dd{:class => attr}= ticket.send(attr.to_sym)
     %dt= f.label :comment
-    %dd= f.text_area :comment
+    %dd= text_area_tag 'ticket[comment]', '', :id => 'ticket_comment'
     - if ticket.changeable_by?(current_user)
       %dt= f.label :event, 'action'
       %dd= f.select :event, ticket.aasm_events_for_current_state
