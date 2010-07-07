@@ -82,8 +82,17 @@ class Ticket < ActiveRecord::Base
   end
 
   def changeable_by?(user)
-    (assignee == user) || (assignee.nil? && (owner == user))
+    (original_assignee == user) || (original_assignee.nil?)
   end
+
+  def original_assignee
+    if assignee_id_changed?
+      assignee_id_was.nil? ? nil : User.find_by_id(assignee_id_was)
+    else
+      assignee
+    end
+  end
+
 
   private
 

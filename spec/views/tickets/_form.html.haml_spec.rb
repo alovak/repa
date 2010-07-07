@@ -31,28 +31,54 @@ describe "/tickets/_form.html.erb" do
   context "when ticket is existed record" do
     before { ticket.stub(:new_record? => false, :owner => mock(:name => 'John'), :assignee => mock(:name => 'Bill')) }
 
-    it "should have ticket events" do
-      ticket.stub(:aasm_events_for_current_state => %w(one two))
+    context "when current_user can't chnage ticket" do
+      before do
+        template.stub(:current_user => mock())
+        ticket.stub(:changeable_by? => false)
+      end
 
-      render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
+      it "should not have ticket events" do
+        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
-      response.should have_tag("select[name=?]", 'ticket[event]') do
-        with_tag("option", "one")
-        with_tag("option", "two")
+        response.should_not have_tag("select[name=?]", 'ticket[event]')
+      end
+
+      it "should not have users to assign" do
+        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
+
+        response.should_not have_tag("select[name=?]", 'ticket[assignee_id]')
       end
     end
 
-    it "should have users to assign" do
-      User.stub(:all => [ mock(:name => 'John',  :id => '1'),
-                          mock(:name => 'Steve', :id => '2') ] )
+    context "when current user can chnage ticket" do
+      before do
+        template.stub(:current_user => mock())
+        ticket.stub(:changeable_by? => true)
+      end
 
-      render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
+      it "should have ticket events" do
+        ticket.stub(:aasm_events_for_current_state => %w(one two))
+        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
-      response.should have_tag("select[name=?]", 'ticket[assignee_id]') do
-        with_tag("option[value=1]", "John")
-        with_tag("option[value=2]", "Steve")
+        response.should have_tag("select[name=?]", 'ticket[event]') do
+          with_tag("option", "one")
+          with_tag("option", "two")
+        end
+      end
+
+      it "should have users to assign" do
+        User.stub(:all => [ mock(:name => 'John',  :id => '1'),
+                            mock(:name => 'Steve', :id => '2') ] )
+
+        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
+
+        response.should have_tag("select[name=?]", 'ticket[assignee_id]') do
+          with_tag("option[value=1]", "John")
+          with_tag("option[value=2]", "Steve")
+        end
       end
     end
+
 
     context "when ticket state is assigned" do
       before { ticket.stub(:state => 'assigned') }
