@@ -24,6 +24,19 @@
     %dd= f.text_area :comment
     %dt= f.label :event, 'action'
     %dd= f.select :event, ticket.aasm_events_for_current_state
-    %dt= f.label :assignee_id, "who's responsible"
-    %dd= f.select :assignee_id, User.all.collect {|user| [user.name, user.id]}
+    %dt.who_is_responsible= f.label :assignee_id, "who's responsible"
+    %dd.who_is_responsible= f.select :assignee_id, User.all.collect {|user| [user.name, user.id]}
   = render :partial => submit_partial
+  = observe_field :ticket_event, :function => "hide_responsible_for_action(value)"
+
+  :javascript
+    document.observe("dom:loaded", function() {
+     hide_responsible_for_action($('ticket_event').value);
+    });
+    function hide_responsible_for_action(action) {
+      if (['cancel', 'accept', 'close'].include(action)) {
+        $$('.who_is_responsible').each (function(el) {el.hide();})
+      } else {
+        $$('.who_is_responsible').each (function(el) {el.show();})
+      }
+    };
