@@ -5,7 +5,7 @@ class Ticket < ActiveRecord::Base
   belongs_to  :owner, :class_name => 'User'
   has_many    :changes
 
-  validates_presence_of :description, :title
+  validates_presence_of :description, :title, :assignee, :owner
 
   validates_presence_of :impact, :rollback_process, :if => "event == 'accept'"
 

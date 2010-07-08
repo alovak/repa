@@ -1,7 +1,7 @@
 class NotifierObserver < ActiveRecord::Observer
-  observe :change
+  observe :ticket
 
-  def after_create(change)
-    Notifier.deliver_ticket_change(change)
+  def after_save(ticket)
+    Notifier.deliver_ticket_change(ticket)
   end
 end

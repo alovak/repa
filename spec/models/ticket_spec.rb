@@ -5,6 +5,9 @@ describe Ticket do
 
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:owner) }
+  it { should validate_presence_of(:assignee) }
+
 
   describe "#original_assignee" do
     it "should be nil when new record" do
@@ -36,7 +39,7 @@ describe Ticket do
 
   context "when valid" do
     before do
-      subject.attributes = {:title => 'title', :description => 'description'}
+      subject.attributes = {:title => 'title', :description => 'description', :assignee => Factory.create(:user), :owner => Factory.create(:user)}
     end
 
     it { should be_valid }

@@ -6,6 +6,7 @@ describe "/notifier/ticket_change" do
                 { :title => 'Ticket title',
                   :description => 'Ticket description',
                   :owner => mock(:name => 'John Owner'),
+                  :assignee => mock(:name => 'Bill Assignee'),
                   :created_at => Time.now })
   }
 
@@ -21,7 +22,7 @@ describe "/notifier/ticket_change" do
 
     response.should have_text(/#{ticket_url(change.ticket)}/)
 
-    ['Ticket title', 'Ticket description', 'John Owner'].each do |word|
+    ['Ticket title', 'Ticket description', 'John Owner', 'Bill Assignee'].each do |word|
       response.should include_text(word)
     end
   end

@@ -1,23 +1,26 @@
 Ticket info
 Title: <%= @ticket.title %>
 Description: <%= @ticket.description %>
-Owner: <%= @change.ticket.owner.name %>
-Created at: <%= @change.ticket.created_at.to_s(:short) %>
-<%= ticket_url(@change.ticket) %>
+Owner: <%= @ticket.owner.name %>
+Assignee: <%= @ticket.assignee.name %>
+Created at: <%= @ticket.created_at.to_s(:short) %>
+<%= ticket_url(@ticket) %>
 <%= "-"*80 %>
-Change info
-<% if @change.state_is %>
-  State is: <%= @change.state_is %>
-<% end %>
-<% if @change.state_was %>
-  State was: <%= @change.state_was %>
-<% end %>
-<% if @change.assignee_is %>
-  Assignee is: <%= @change.assignee_is.name %>
-<% end %>
-<% if @change.assignee_was %>
-  Assignee was: <%= @change.assignee_was.name %>
-<% end %>
-<% if @change.comment_is %>
-  Comment: <%= @change.comment_is %>
+<% if @change %>
+  Change info
+  <% if @change.state_is %>
+    State is: <%= @change.state_is %>
+  <% end %>
+  <% if @change.state_was %>
+    State was: <%= @change.state_was %>
+  <% end %>
+  <% if @change.assignee_is %>
+    Assignee is: <%= @change.assignee_is.name %>
+  <% end %>
+  <% if @change.assignee_was %>
+    Assignee was: <%= @change.assignee_was.name %>
+  <% end %>
+  <% if @change.comment_is %>
+    Comment: <%= @change.comment_is %>
+  <% end %>
 <% end %>
