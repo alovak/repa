@@ -49,7 +49,7 @@ Feature:
     And should see "Bill Gates" within ".change .assignee_was"
     And should see "Steve Jobs" within ".change .assignee_is"
 
-
+  @javascript
   Scenario: start ticket implementation
     Given the following ticket exists:
       | title     | state    | assignee         | owner          |
@@ -62,7 +62,10 @@ Feature:
       | Impact           | impact description                  |
       | Rollback process | description of the rollback process |
     And select "accept" from "action"
+    Then show me the page
+
     And press "Update"
+    Then show me the page
 
     Then I should see "Ticket was successfully updated"
     And should see "impact description" within ".ticket .impact"

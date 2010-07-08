@@ -24,3 +24,4 @@ config.action_mailer.delivery_method = :test
 config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
 config.gem 'capybara',         :lib => false, :version => '>=0.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/capybara'))
 config.gem 'factory_girl'
+config.gem 'database_cleaner'

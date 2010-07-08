@@ -23,6 +23,10 @@ require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links wi
 # prefer to use XPath just remove this line and adjust any selectors in your
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
+Capybara.javascript_driver = :culerity
+
+DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean
 
 # If you set this to false, any error raised from within your app will bubble
 # up to your step definition and out to cucumber unless you catch it somewhere
@@ -47,6 +51,7 @@ ActionController::Base.allow_rescue = false
 # after each scenario, which can lead to hard-to-debug failures in
 # subsequent scenarios. If you do this, we recommend you create a Before
 # block that will explicitly put your database in a known state.
-Cucumber::Rails::World.use_transactional_fixtures = true
+Cucumber::Rails::World.use_transactional_fixtures = false
+#Cucumber::Rails::World.use_transactional_fixtures = true
 
 require 'factory_girl/step_definitions'
