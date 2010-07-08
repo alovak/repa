@@ -1,9 +1,8 @@
 class TicketsController < ApplicationController
-  before_filter :set_users
   # GET /tickets
   # GET /tickets.xml
   def index
-    @assignee_id = params[:assignee_id] ? params[:assignee_id].to_i : @current_user.id
+    @assignee_id = params[:assignee_id] ? params[:assignee_id].to_i : current_user.id
     conditions = { :assignee_id => @assignee_id } unless @assignee_id.zero?
 
     @tickets = Ticket.paginate :page => params[:page], :conditions => conditions
@@ -13,18 +12,6 @@ class TicketsController < ApplicationController
       format.xml  { render :xml => @tickets }
     end
   end
-
-  # GET /tickets/1
-  # GET /tickets/1.xml
-  # def show
-  #   @ticket = Ticket.find(params[:id])
-  #   @change = Change.new
-
-  #   respond_to do |format|
-  #     format.html # show.html.erb
-  #     format.xml  { render :xml => @ticket }
-  #   end
-  # end
 
   # GET /tickets/new
   # GET /tickets/new.xml
@@ -75,45 +62,5 @@ class TicketsController < ApplicationController
         format.xml  { render :xml => @ticket.errors, :status => :unprocessable_entity }
       end
     end
-  end
-
-  # DELETE /tickets/1
-  # DELETE /tickets/1.xml
-  def destroy
-    @ticket = Ticket.find(params[:id])
-    @ticket.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(tickets_url) }
-      format.xml  { head :ok }
-    end
-  end
-
-  def change
-    @ticket = Ticket.find(params[:id])
-
-    @ticket.attributes = params[:ticket]
-    @change = Change.new(params[:change])
-    @change.owner = current_user
-
-    if params[:ticket_action] && @ticket.allow_event?(params[:ticket_action])
-      @ticket.send(:"#{params[:ticket_action]}!")
-      @change.set_assignees(@ticket)
-      @change.set_state(@ticket)
-    end
-
-    if @ticket.save && (@ticket.changes << @change)
-      flash[:notice] = 'Ticket was successfully updated'
-      redirect_to(@ticket)
-    else
-      flash.now[:error] = 'Ticket was not saved'
-      render :show
-    end
-  end
-
-  private
-
-  def set_users
-    @users = User.find(:all)#.reject {|user| user.id == @current_user.id}
   end
 end

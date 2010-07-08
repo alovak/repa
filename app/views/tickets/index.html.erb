@@ -11,9 +11,9 @@
       <%= select_tag 'assignee_id',
             options_for_select(
               [ ["Anyone", ""],
-                ["Me (#{@current_user.name})", @current_user.id],
+                ["Me (#{current_user.name})", current_user.id],
                 ["-"*12, ""]], @assignee_id) <<
-            options_from_collection_for_select(@users, :id, :name, @assignee_id)
+            options_from_collection_for_select(User.all, :id, :name, @assignee_id)
       %>
       <%= observe_field(:assignee_id, :function => "element.form.submit()") %>
     <% end %>

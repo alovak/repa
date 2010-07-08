@@ -6,37 +6,29 @@ describe TicketsController do
   end
 
 
-#   describe "GET index" do
-#     it "assigns all tickets as @tickets" do
-#       Ticket.stub!(:find).with(:all).and_return([mock_ticket])
-#       get :index
-#       assigns[:tickets].should == [mock_ticket]
-#     end
-#   end
+  describe "GET index" do
+    it "assigns all tickets as @tickets" do
+      Ticket.should_receive(:paginate).and_return([mock_ticket])
+      get :index
+      assigns[:tickets].should == [mock_ticket]
+    end
+  end
 
-#   describe "GET show" do
-#     it "assigns the requested ticket as @ticket" do
-#       Ticket.stub!(:find).with("37").and_return(mock_ticket)
-#       get :show, :id => "37"
-#       assigns[:ticket].should equal(mock_ticket)
-#     end
-#   end
+  describe "GET new" do
+    it "assigns a new ticket as @ticket" do
+      Ticket.stub!(:new).and_return(mock_ticket)
+      get :new
+      assigns[:ticket].should equal(mock_ticket)
+    end
+  end
 
-#   describe "GET new" do
-#     it "assigns a new ticket as @ticket" do
-#       Ticket.stub!(:new).and_return(mock_ticket)
-#       get :new
-#       assigns[:ticket].should equal(mock_ticket)
-#     end
-#   end
-
-#   describe "GET edit" do
-#     it "assigns the requested ticket as @ticket" do
-#       Ticket.stub!(:find).with("37").and_return(mock_ticket)
-#       get :edit, :id => "37"
-#       assigns[:ticket].should equal(mock_ticket)
-#     end
-#   end
+  describe "GET edit" do
+    it "assigns the requested ticket as @ticket" do
+      Ticket.stub!(:find).with("37").and_return(mock_ticket)
+      get :edit, :id => "37"
+      assigns[:ticket].should equal(mock_ticket)
+    end
+  end
 
   describe "POST create" do
     describe "with valid params" do
@@ -75,62 +67,47 @@ describe TicketsController do
 
   end
 
-#   describe "PUT update" do
+  describe "PUT update" do
 
-#     describe "with valid params" do
-#       it "updates the requested ticket" do
-#         Ticket.should_receive(:find).with("37").and_return(mock_ticket)
-#         mock_ticket.should_receive(:update_attributes).with({'these' => 'params'})
-#         put :update, :id => "37", :ticket => {:these => 'params'}
-#       end
+    describe "with valid params" do
+      it "updates the requested ticket" do
+        Ticket.should_receive(:find).with("37").and_return(mock_ticket)
+        mock_ticket.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :ticket => {:these => 'params'}
+      end
 
-#       it "assigns the requested ticket as @ticket" do
-#         Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => true))
-#         put :update, :id => "1"
-#         assigns[:ticket].should equal(mock_ticket)
-#       end
+      it "assigns the requested ticket as @ticket" do
+        Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => true))
+        put :update, :id => "1"
+        assigns[:ticket].should equal(mock_ticket)
+      end
 
-#       it "redirects to the ticket" do
-#         Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => true))
-#         put :update, :id => "1"
-#         response.should redirect_to(ticket_url(mock_ticket))
-#       end
-#     end
+      it "redirects to the edit ticket" do
+        Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => true))
+        put :update, :id => "1"
+        response.should redirect_to(edit_ticket_url(mock_ticket))
+      end
+    end
 
-#     describe "with invalid params" do
-#       it "updates the requested ticket" do
-#         Ticket.should_receive(:find).with("37").and_return(mock_ticket)
-#         mock_ticket.should_receive(:update_attributes).with({'these' => 'params'})
-#         put :update, :id => "37", :ticket => {:these => 'params'}
-#       end
+    describe "with invalid params" do
+      it "updates the requested ticket" do
+        Ticket.should_receive(:find).with("37").and_return(mock_ticket)
+        mock_ticket.should_receive(:update_attributes).with({'these' => 'params'})
+        put :update, :id => "37", :ticket => {:these => 'params'}
+      end
 
-#       it "assigns the ticket as @ticket" do
-#         Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => false))
-#         put :update, :id => "1"
-#         assigns[:ticket].should equal(mock_ticket)
-#       end
+      it "assigns the ticket as @ticket" do
+        Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => false))
+        put :update, :id => "1"
+        assigns[:ticket].should equal(mock_ticket)
+      end
 
-#       it "re-renders the 'edit' template" do
-#         Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => false))
-#         put :update, :id => "1"
-#         response.should render_template('edit')
-#       end
-#     end
+      it "re-renders the 'edit' template" do
+        Ticket.stub!(:find).and_return(mock_ticket(:update_attributes => false))
+        put :update, :id => "1"
+        response.should render_template('edit')
+      end
+    end
 
-#   end
-
-#   describe "DELETE destroy" do
-#     it "destroys the requested ticket" do
-#       Ticket.should_receive(:find).with("37").and_return(mock_ticket)
-#       mock_ticket.should_receive(:destroy)
-#       delete :destroy, :id => "37"
-#     end
-
-#     it "redirects to the tickets list" do
-#       Ticket.stub!(:find).and_return(mock_ticket(:destroy => true))
-#       delete :destroy, :id => "1"
-#       response.should redirect_to(tickets_url)
-#     end
-#   end
-
+  end
 end
