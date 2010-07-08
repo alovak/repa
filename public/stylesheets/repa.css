@@ -8,7 +8,9 @@ BODY {
 
 textarea {
   font-family:"Helvetica Neue",Arial,Helvetica,Tahoma,sans-serif;
-  font-size: 90%;
+  font-size: 115%;
+  width: 230px;
+  height: 100px;
 }
 
 a {
@@ -163,6 +165,8 @@ form dt {
   float: left;
   clear: left;
   position: relative;
+  font-size: 10px;
+
 }
 
 form dd {
@@ -199,6 +203,16 @@ div.page_body h2 {
 div.page_body {
   padding: 10px 30px 10px 24px;
   background: #fff;
+}
+
+div.page_body .left {
+    float: left;
+    width: 70%;
+}
+
+div.page_body .right {
+    float: right;
+    width: 30%;
 }
 
 /* PAGE HEADER LINKS */
@@ -244,10 +258,14 @@ div.actions {
 }
 
 .ticket {
-  border-bottom: 1px solid #dbdbdb;
-  background: #f7f7f7;
 }
 
+form .panel {
+    background: #f3f3f3;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-top: 1px solid #d7d7d7;
+}
 .ticket .author, .change .author {
   padding: 0;
   margin: 2px 0;
@@ -256,9 +274,39 @@ div.actions {
 }
 
 .ticket .info {
-  float:right;
-  background: #dbdbdb;
   padding: 5px;
+}
+
+.ticket .info .title {
+    font-size: 140%;
+}
+.ticket .info .description {
+
+}
+.ticket .info .details {
+    padding-top: 5px;
+    font-size: 85%;
+    color: #2a2a2a
+}
+
+.ticket .info .hint {
+    font-size: 85%;
+    padding-bottom: 10px;
+}
+.ticket .impact p, .ticket .rollback_process p  {
+    font-size: 120%;
+    margin: 0;
+    padding: 0;
+}
+
+.ticket .info .details .state {
+    padding-left: 5px;
+    background: #a77601;
+    color: #fff;
+}
+
+.ticket .info span {
+    padding-right: 5px;
 }
 
 .ticket .description {

@@ -1,0 +1,20 @@
+.ticket
+  .info
+    .title= ticket.title
+    .description= simple_format(ticket.description)
+    - if (!ticket.impact.blank? && !ticket.rollback_process.blank?)
+      .hint
+        %b Impact:
+        .impact= simple_format(ticket.impact)
+      .hint
+        %b Rollback process:
+        .rollback_process= simple_format(ticket.rollback_process)
+    .details
+      %div
+        State:
+        %span.state= ticket.state
+      Assignee:
+      %span.assignee= ticket.assignee.name
+      Owner:
+      %span.owner= ticket.owner.name
+      .created_at= ticket.created_at.to_s(:long)

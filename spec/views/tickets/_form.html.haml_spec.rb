@@ -47,6 +47,7 @@ describe "/tickets/_form.html.erb" do
         render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
         response.should_not have_tag("select[name=?]", 'ticket[assignee_id]')
+
       end
     end
 
@@ -86,37 +87,10 @@ describe "/tickets/_form.html.erb" do
         render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
         response.should have_tag(".ticket") do
-          without_tag("dd.impact")
-          without_tag("dd.rollback_process")
+          with_tag("textarea[name=?]", "ticket[impact]")
+          with_tag("textarea[name=?]", "ticket[rollback_process]")
         end
       end
-    end
-
-    context "when impact and rollback_process are blank" do
-      before { ticket.stub(:impact => '', :rollback_process => '') }
-
-      it "should not contain impact and rollback lables" do
-        render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
-      end
-    end
-
-    it "should contain ticket attributes" do
-      ticket.stub(:title => 'title',
-                  :description => 'description',
-                  :state => 'new',
-                  :assignee => mock(:name => 'John'),
-                  :owner => mock(:name => 'Bill'))
-
-      render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
-
-      response.should have_tag(".ticket") do
-        with_tag(".title", 'title')
-        with_tag(".description", 'description')
-        with_tag(".state", 'new')
-        with_tag(".assignee", 'John')
-        with_tag(".owner", 'Bill')
-      end
-
     end
   end
 end

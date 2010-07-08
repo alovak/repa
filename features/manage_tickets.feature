@@ -44,10 +44,10 @@ Feature:
     And should see "assigned" within ".ticket .state"
     And should see "Steve Jobs" within ".ticket .assignee"
 
-    And should see "new" within ".changes .change .state_was"
-    And should see "assigned" within ".changes .change .state_is"
-    And should see "Bill Gates" within ".changes .change .assignee_was"
-    And should see "Steve Jobs" within ".changes .change .assignee_is"
+    And should see "new" within ".change .state_was"
+    And should see "assigned" within ".change .state_is"
+    And should see "Bill Gates" within ".change .assignee_was"
+    And should see "Steve Jobs" within ".change .assignee_is"
 
 
   Scenario: start ticket implementation
@@ -71,5 +71,5 @@ Feature:
     And should see "implementing" within ".ticket .state"
     And should see "Steve Jobs" within ".ticket .assignee"
 
-    And should see "assigned" within ".changes .change .state_was"
-    And should see "implementing" within ".changes .change .state_is"
+    And should see "assigned" within ".change .state_was"
+    And should see "implementing" within ".change .state_is"

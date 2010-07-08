@@ -6,7 +6,8 @@ describe "/tickets/_change.html.haml" do
          :state_was => 'pending',
          :assignee_is => mock(:name => 'John'),
          :assignee_was => mock(:name => 'Bill'),
-         :comment_is => 'comment')
+         :comment_is => 'comment',
+         :created_at => Time.now)
   }
 
   it "should contain attributes" do

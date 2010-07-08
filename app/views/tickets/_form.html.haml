@@ -6,20 +6,11 @@
       %dd= f.text_field :title
       %dt= f.label :description
       %dd= f.text_area :description
-    - else
-      - %w(title description state).each do |attr|
-        %dd{:class => attr}= ticket.send(attr.to_sym)
-      %dt.owner= ticket.owner.name
-      %dd.assignee= ticket.assignee.name
     - if ticket.state == 'assigned'
       %dt= f.label :impact
       %dd= f.text_area :impact
       %dt= f.label :rollback_process
       %dd= f.text_area :rollback_process
-    - if !ticket.impact.blank? && !ticket.rollback_process.blank?
-      - %w(impact rollback_process).each do |attr|
-        %dl= attr
-        %dd{:class => attr}= ticket.send(attr.to_sym)
     %dt= f.label :comment
     %dd= text_area_tag 'ticket[comment]', '', :id => 'ticket_comment'
     - if ticket.changeable_by?(current_user)
