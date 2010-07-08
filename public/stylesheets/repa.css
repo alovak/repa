@@ -219,8 +219,8 @@ div.actions {
 }
 /* USERS */
 
-.user { 
-  width: 33%; 
+.user {
+  width: 33%;
   float: left;
   margin-bottom: 15px;
 }
@@ -256,8 +256,8 @@ div.actions {
 }
 
 .ticket .info {
-  float:right; 
-  background: #dbdbdb; 
+  float:right;
+  background: #dbdbdb;
   padding: 5px;
 }
 
@@ -281,17 +281,24 @@ div.actions {
 
 }
 
-.change  .author {
-  color: #505050;
-  font-size: 90%;
-}
-
 .change .note {
   font-size: 85%;
+  color: #2a2a2a;
+  padding-bottom: 2px;
 }
 
 .change .comment {
-  padding-top: 10px;
+  padding-top: 5px;
+  font-size: 90%;
+}
+
+.change .note span {
+    font-weight: bold;
+}
+
+.change .comment p {
+    padding: 0;
+    margin: 0;
 }
 
 .action {

@@ -1,9 +1,18 @@
 .change
-  .state_was= change.state_was
-  .state_is= change.state_is
-  - if change.assignee_was
-    .assignee_was= change.assignee_was.name
-  - if change.assignee_is
-    .assignee_is= change.assignee_is.name
+  .note= change.created_at.to_s(:short)
+  - unless change.state_is == change.state_was
+    .note
+      State changed from
+      %span.state_was= change.state_was
+      to
+      %span.state_is= change.state_is
+  - unless change.assignee_was == change.assignee_is
+    .note
+      Assigned user changed from
+      %span.assignee_was= change.assignee_was.name
+      to
+      %span.assignee_is= change.assignee_is.name
   - unless change.comment_is.blank?
-    .comment= change.comment_is
+    .note Comment:
+    .comment
+      = simple_format(change.comment_is)
