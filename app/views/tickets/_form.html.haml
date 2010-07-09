@@ -6,7 +6,7 @@
       %dd= f.text_field :title
       %dt= f.label :description
       %dd= f.text_area :description
-    - if ticket.state == 'assigned'
+    - if (ticket.state == 'assigned' && ticket.impact.blank? && ticket.rollback_process.blank?)
       %dt= f.label :impact
       %dd= f.text_area :impact
       %dt= f.label :rollback_process

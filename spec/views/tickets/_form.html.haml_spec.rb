@@ -83,12 +83,26 @@ describe "/tickets/_form.html.erb" do
 
     context "when ticket state is assigned" do
       before { ticket.stub(:state => 'assigned') }
+
       it "should contain impact, rollback_process fileds" do
         render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
 
         response.should have_tag(".ticket") do
           with_tag("textarea[name=?]", "ticket[impact]")
           with_tag("textarea[name=?]", "ticket[rollback_process]")
+        end
+      end
+
+      context "when impact and rollback are not blank" do
+        before { ticket.stub(:impact => 'impact', :rollback_process => 'rollback_process') }
+
+        it "should not contain impact, rollback_process fileds" do
+          render :partial => 'tickets/form', :locals => {:ticket => ticket, :submit_partial => '/common/create_or_cancel'}
+
+          response.should have_tag(".ticket") do
+            without_tag("textarea[name=?]", "ticket[impact]")
+            without_tag("textarea[name=?]", "ticket[rollback_process]")
+          end
         end
       end
     end
