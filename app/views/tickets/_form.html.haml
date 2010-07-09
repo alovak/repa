@@ -26,7 +26,7 @@
      hide_responsible_for_action($('ticket_event').value);
     });
     function hide_responsible_for_action(action) {
-      if (['cancel', 'accept', 'close'].include(action)) {
+      if (['cancel', 'accept_for_implement', 'accept_for_test', 'close'].include(action)) {
         $$('.who_is_responsible').each (function(el) {el.hide();})
         $('ticket_assignee_id').disable();
       } else {

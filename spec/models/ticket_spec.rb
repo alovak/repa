@@ -50,14 +50,14 @@ describe Ticket do
     end
   end
 
-  context "when event is assigned" do
-    before { subject.stub(:event => 'accept') }
+  context "when event is accept_for_implement" do
+    before { subject.stub(:event => 'accept_for_implement') }
 
     it { should validate_presence_of(:impact) }
     it { should validate_presence_of(:rollback_process) }
   end
 
-  context "when event is not accept" do
+  context "when event is not accept_for_implement" do
     before { subject.stub(:event => 'approve') }
 
     it { should_not validate_presence_of(:impact) }
