@@ -20,7 +20,7 @@ describe "/notifier/ticket_change" do
   it "should contain ticket info" do
     render
 
-    response.should have_text(/#{ticket_url(change.ticket)}/)
+    response.should have_text(/#{edit_ticket_url(change.ticket)}/)
 
     ['Ticket title', 'Ticket description', 'John Owner', 'Bill Assignee'].each do |word|
       response.should include_text(word)

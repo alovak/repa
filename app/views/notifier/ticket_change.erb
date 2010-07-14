@@ -4,7 +4,7 @@ Description: <%= @ticket.description %>
 Owner: <%= @ticket.owner.name %>
 Assignee: <%= @ticket.assignee.name %>
 Created at: <%= @ticket.created_at.to_s(:short) %>
-<%= ticket_url(@ticket) %>
+<%= edit_ticket_url(@ticket) %>
 <%= "-"*80 %>
 <% if @change %>
   Change info
