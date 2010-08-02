@@ -85,6 +85,24 @@ class Ticket < ActiveRecord::Base
   end
 
 
+  def self.close_with_date(id, date)
+    date_time = DateTime.parse(date) + rand(9).hours
+    Ticket.record_timestamps = false
+    Change.record_timestamps = false
+
+    ticket = Ticket.find(id)
+    ticket.created_at = date_time
+
+    ticket.changes.each do |change|
+      date_time = date_time + rand(20).minutes
+      change.created_at = change.updated_at = date_time
+      change.save!
+    end
+
+    ticket.updated_at = date_time
+    ticket.save!
+  end
+
   private
 
   def call_event
