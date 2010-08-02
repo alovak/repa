@@ -93,7 +93,7 @@ class Ticket < ActiveRecord::Base
     ticket = Ticket.find(id)
     ticket.created_at = date_time
 
-    ticket.changes.find(:all, :order => 'id DESC').each do |change|
+    ticket.changes.find(:all, :order => 'id').each do |change|
       date_time = date_time + rand(20).minutes
       change.created_at = change.updated_at = date_time
       change.save!
