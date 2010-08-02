@@ -17,7 +17,7 @@
       %dt= f.label :event, 'action'
       %dd= f.select :event, ticket.aasm_events_for_current_state
       %dt.who_is_responsible= f.label :assignee_id, "who's responsible"
-      %dd.who_is_responsible= f.select :assignee_id, User.all.reject {|user| user.id == current_user.id}.collect {|user| [user.name, user.id]}
+      %dd.who_is_responsible= f.select :assignee_id, User.all.collect {|user| [user.name, user.id]}
   = render :partial => submit_partial
   = observe_field :ticket_event, :function => "hide_responsible_for_action(value)"
 
