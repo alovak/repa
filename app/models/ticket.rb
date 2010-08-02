@@ -103,6 +103,10 @@ class Ticket < ActiveRecord::Base
     ticket.save!
   end
 
+  def changed?
+    %w(assignee_id_changed? comment_changed? state_changed?).any?{|attr| self.send(attr.to_sym) }
+  end
+
   private
 
   def call_event
