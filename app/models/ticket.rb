@@ -86,7 +86,7 @@ class Ticket < ActiveRecord::Base
 
 
   def self.close_with_date(id, date)
-    date_time = DateTime.parse(date) + rand(9).hours
+    date_time = Time.zone.parse(date) + rand(9).hours
     Ticket.record_timestamps = false
     Change.record_timestamps = false
 
